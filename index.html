@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Newton Swarm ($SNEWT) — Defying Financial Gravity</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Space Grotesk', sans-serif; background-color: #050b14; }
+    .serif-title { font-family: 'Cinzel', serif; }
+  </style>
+</head>
+<body class="text-slate-100 min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-black">
+
+  <!-- Header -->
+  <header class="border-b border-emerald-900/40 bg-slate-950/70 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full border-2 border-amber-400 bg-emerald-950 flex items-center justify-center font-bold text-amber-300 text-lg">
+          🍎
+        </div>
+        <div>
+          <span class="font-bold text-lg tracking-tight text-white block leading-none">NEWTON SWARM</span>
+          <span class="text-xs text-emerald-400 font-semibold tracking-widest">$SNEWT · ROBINHOOD CHAIN</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="https://x.com/newtonswarm" target="_blank" class="text-xs uppercase tracking-wider font-semibold px-4 py-2 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition">Twitter / X</a>
+        <a href="https://si-md.xyz/launchpad/" target="_blank" class="text-xs uppercase tracking-wider font-bold px-4 py-2 rounded-lg bg-amber-400 text-slate-950 hover:bg-amber-300 transition">Launchpad</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="max-w-5xl mx-auto px-6 py-16 flex-1 flex flex-col items-center text-center">
+    
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-950/40 text-emerald-300 text-xs font-semibold mb-8">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      800 Identity.md AI Agents Active on Robinhood Chain
+    </div>
+
+    <h1 class="serif-title text-4xl sm:text-6xl font-bold tracking-tight text-amber-300 max-w-3xl leading-tight">
+      DEFYING FINANCIAL GRAVITY
+    </h1>
+    
+    <p class="mt-6 text-lg sm:text-xl text-slate-300 max-w-2xl font-light leading-relaxed">
+      In 1720, Sir Isaac Newton lost his fortune to market madness. In 2026, he assumed command of the Identity.md swarm to enforce mathematical gravity against predatory MEV bots.
+    </p>
+
+    <!-- Contract Box -->
+    <div class="mt-10 w-full max-w-xl p-4 rounded-xl border border-emerald-800/60 bg-slate-900/80 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="text-left w-full overflow-hidden">
+        <div class="text-[10px] tracking-widest text-slate-400 uppercase font-bold">Contract Address (Robinhood Chain)</div>
+        <div id="ca" class="text-xs sm:text-sm font-mono text-emerald-400 truncate mt-0.5">Deploying via SIMD Swarm...</div>
+      </div>
+      <button onclick="copyCA()" class="w-full sm:w-auto text-xs uppercase tracking-wider font-bold px-5 py-2.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition whitespace-nowrap">
+        Copy CA
+      </button>
+    </div>
+
+    <!-- Features / Mechanics Grid -->
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 w-full text-left">
+      <div class="p-6 rounded-xl border border-slate-800 bg-slate-900/40">
+        <div class="text-2xl mb-3">🛡️</div>
+        <h3 class="font-bold text-white text-base">Opening Gravity Hook</h3>
+        <p class="mt-2 text-sm text-slate-400 leading-relaxed">A 40% opening penalty crushes initial sniper bots, scaling down to 2% over 60 minutes. Penalties feed liquidity.</p>
+      </div>
+
+      <div class="p-6 rounded-xl border border-slate-800 bg-slate-900/40">
+        <div class="text-2xl mb-3">⚖️</div>
+        <h3 class="font-bold text-white text-base">Zero Dev Allocation</h3>
+        <p class="mt-2 text-sm text-slate-400 leading-relaxed">90% of total supply goes directly into the Uniswap v4 $IMD pool. No team tokens, no insider allocation.</p>
+      </div>
+
+      <div class="p-6 rounded-xl border border-slate-800 bg-slate-900/40">
+        <div class="text-2xl mb-3">⚡</div>
+        <h3 class="font-bold text-white text-base">Autonomous Swarm</h3>
+        <p class="mt-2 text-sm text-slate-400 leading-relaxed">Audited and deployed through 800+ Identity.md agents, prioritizing long-term contract quality over speed.</p>
+      </div>
+    </div>
+
+    <!-- Lore Box -->
+    <div class="mt-14 p-8 rounded-2xl border border-amber-500/20 bg-amber-950/10 text-left max-w-3xl">
+      <h4 class="serif-title text-amber-300 font-bold text-lg mb-2">The Master of the Mint Returns</h4>
+      <p class="text-sm text-slate-300 leading-relaxed">
+        "I can calculate the motion of heavenly bodies, but not the madness of people." Having spent his final years running the British Royal Mint and hunting down coin counterfeiters, Newton now patrols the 100ms mempool of Robinhood Chain.
+      </p>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-900 py-6 text-center text-xs text-slate-500">
+    <p>Newton Swarm ($SNEWT) · Built with Identity.md on Robinhood Chain</p>
+  </footer>
+
+  <script>
+    function copyCA() {
+      const text = document.getElementById('ca').innerText;
+      navigator.clipboard.writeText(text);
+      alert('Contract copied to clipboard!');
+    }
+  </script>
+</body>
+</html>

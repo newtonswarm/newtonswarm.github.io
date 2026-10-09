@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Newton Swarm ($SNEWT) — Autonomous Anti-MEV Portal</title>
+  
+  <!-- FAVICON (SEKME LOGOSU) -->
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="shortcut icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,6 +33,7 @@
       pointer-events: none;
     }
 
+    /* Soundwave bars */
     .bar-anim { animation: soundWave 0.8s ease-in-out infinite alternate; }
     .bar-anim:nth-child(2) { animation-delay: 0.2s; }
     .bar-anim:nth-child(3) { animation-delay: 0.4s; }
@@ -34,9 +41,37 @@
       0% { height: 4px; }
       100% { height: 16px; }
     }
+
+    /* Loading Screen Glow */
+    .glow-gold {
+      box-shadow: 0 0 35px rgba(245, 158, 11, 0.35);
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-black overflow-x-hidden relative">
+
+  <!-- ================= AUTOMATIC PRELOADER (YÜKLEME EKRANI) ================= -->
+  <div id="preloader" class="fixed inset-0 z-50 bg-[#030712] flex flex-col items-center justify-center p-4 transition-opacity duration-700 ease-out">
+    <div class="relative w-32 h-32 mb-6">
+      <div class="absolute inset-0 rounded-full border-2 border-dashed border-amber-400/40 animate-spin" style="animation-duration: 8s;"></div>
+      <div class="absolute -inset-2 rounded-full border border-emerald-500/20 animate-ping" style="animation-duration: 3s;"></div>
+      <img src="logo.png" alt="Newton Swarm" class="relative z-10 w-full h-full object-contain rounded-full border-2 border-amber-400 glow-gold shadow-2xl">
+    </div>
+
+    <div class="font-serif-title text-amber-300 tracking-wider text-2xl font-extrabold text-center">NEWTON SWARM</div>
+    
+    <div class="mt-2 text-xs font-mono-code text-slate-400 flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+      <span id="loader-status">Synchronizing 800 Identity.md AI Agents...</span>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="w-64 max-w-xs bg-slate-900 border border-slate-800 rounded-full h-2 mt-6 overflow-hidden p-0.5">
+      <div id="loader-bar" class="bg-gradient-to-r from-emerald-500 via-amber-400 to-emerald-400 h-full rounded-full w-0 transition-all duration-150"></div>
+    </div>
+    
+    <div class="mt-2 text-[11px] font-mono-code text-emerald-400 font-bold" id="loader-percent">0%</div>
+  </div>
 
   <!-- Background Particle Field -->
   <canvas id="bg-canvas"></canvas>
@@ -51,7 +86,7 @@
       <!-- Logo & Brand -->
       <a href="#" class="flex items-center gap-3 group">
         <div class="relative w-11 h-11 rounded-full overflow-hidden border-2 border-amber-400/90 shadow-md group-hover:scale-105 transition-transform bg-slate-900">
-          <img src="logo.png" onerror="this.src='https://raw.githubusercontent.com/twitter/twemoji/master/assets/72x72/1f34f.png'" alt="SNEWT Logo" class="w-full h-full object-cover">
+          <img src="logo.png" alt="SNEWT Logo" class="w-full h-full object-cover">
         </div>
         <div>
           <span class="font-serif-title font-bold text-base sm:text-lg tracking-wider text-amber-300 block leading-tight">NEWTON SWARM</span>
@@ -61,7 +96,7 @@
 
       <!-- Controls -->
       <div class="flex items-center gap-2 sm:gap-3">
-        <!-- Audio Button -->
+        <!-- Audio Button (Starts Muted) -->
         <button onclick="toggleAudio()" id="audio-btn" class="px-3 py-2 rounded-lg bg-slate-900 border border-slate-800 text-xs font-mono-code text-slate-300 hover:border-emerald-500/40 transition flex items-center gap-2">
           <div id="soundwave" class="hidden flex items-end gap-0.5 h-4">
             <span class="w-1 bg-emerald-400 rounded-full bar-anim"></span>
@@ -76,7 +111,7 @@
           X / Twitter
         </a>
 
-        <!-- Official Launchpad Link -->
+        <!-- Launchpad Link -->
         <a href="https://www.si-md.xyz/launchpad/0xb42cf2ed6faf5340442af95b8b617e898e97d22f" target="_blank" class="text-xs uppercase font-mono-code tracking-wider font-bold px-3.5 sm:px-4 py-2 rounded-lg bg-amber-400 text-slate-950 hover:bg-amber-300 transition shadow-lg shadow-amber-400/20 flex items-center gap-1.5">
           <span>Trade on Launchpad ↗</span>
         </a>
@@ -206,7 +241,7 @@
         </div>
       </div>
 
-      <!-- TAB 2: SAFE TRADE CALCULATOR (NO MALICIOUS CALLS) -->
+      <!-- TAB 2: SAFE TRADE CALCULATOR -->
       <div id="panel-swap" class="tab-panel hidden max-w-lg mx-auto">
         <div class="p-6 rounded-2xl border border-emerald-900/60 bg-slate-900/90 backdrop-blur-md shadow-2xl">
           <div class="flex items-center justify-between pb-4 border-b border-slate-800">
@@ -254,13 +289,13 @@
         </div>
       </div>
 
-      <!-- TAB 3: ANTI-MEV CANNON (ARCADE) -->
+      <!-- TAB 3: ANTI-MEV CANNON (WITH OFFICIAL NEWTON MASCOT SHOOTER) -->
       <div id="panel-arcade" class="tab-panel hidden max-w-2xl mx-auto">
         <div class="p-5 rounded-2xl border border-amber-500/30 bg-slate-900/90 backdrop-blur-md">
           <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-800">
             <div>
               <h3 class="font-serif-title text-amber-300 text-base font-bold">Newton's Anti-MEV Cannon</h3>
-              <p class="text-xs text-slate-400">Aim with mouse, click to blast toxic sniper bots before they hit liquidity!</p>
+              <p class="text-xs text-slate-400">Aim with Newton Pepe and click to blast MEV bots before they hit liquidity!</p>
             </div>
             <div class="flex items-center gap-3 font-mono-code text-xs">
               <span class="text-slate-400">Score: <strong id="game-score" class="text-amber-300 text-sm">0</strong></span>
@@ -273,9 +308,11 @@
             <canvas id="game-canvas" width="600" height="380" class="w-full h-[320px] sm:h-[380px] cursor-crosshair block"></canvas>
             
             <div id="game-overlay" class="absolute inset-0 bg-slate-950/85 backdrop-blur-sm flex flex-col items-center justify-center p-4">
-              <div class="text-4xl mb-2">🍏⚡</div>
+              <div class="w-16 h-16 rounded-full border-2 border-amber-400 overflow-hidden mb-2 shadow-lg">
+                <img src="logo.png" alt="Newton Defender" class="w-full h-full object-cover">
+              </div>
               <h4 id="overlay-title" class="font-serif-title text-xl text-amber-300 font-bold">Mempool Defense Ready</h4>
-              <p id="overlay-sub" class="text-xs text-slate-300 mt-1 max-w-xs text-center font-mono-code">Protect the 1720 Royal Mint reserves from sandwich bots!</p>
+              <p id="overlay-sub" class="text-xs text-slate-300 mt-1 max-w-xs text-center font-mono-code">Command Sir Isaac Newton to repel sandwich snipers!</p>
               <button onclick="startGame()" class="mt-4 px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold font-mono-code text-xs uppercase tracking-wider transition shadow-lg shadow-emerald-500/30">
                 Start Defense
               </button>
@@ -283,8 +320,8 @@
           </div>
 
           <div class="mt-3 flex items-center justify-between text-[11px] font-mono-code text-slate-400">
-            <span>Controls: Mouse to Aim & Click to Shoot</span>
-            <span class="text-emerald-400">Sound FX: 8-Bit Web Audio Synthesizer</span>
+            <span>Controls: Aim with mouse & Click to Shoot Apples</span>
+            <span class="text-emerald-400">Defender: Official Newton Pepe</span>
           </div>
         </div>
       </div>
@@ -351,7 +388,49 @@
       BLOCKSCOUT_API: "https://robinhoodchain.blockscout.com/api/v2"
     };
 
-    // 1. Audio (Muted by default)
+    // ----------------------------------------------------
+    // 0. AUTOMATIC PROGRESS PRELOADER
+    // ----------------------------------------------------
+    let loadProgress = 0;
+    const loaderBar = document.getElementById('loader-bar');
+    const loaderPercent = document.getElementById('loader-percent');
+    const loaderStatus = document.getElementById('loader-status');
+    const preloader = document.getElementById('preloader');
+
+    const loaderSteps = [
+      { p: 25, msg: "Connecting to Robinhood Chain Node (4663)..." },
+      { p: 55, msg: "Auditing 800 Identity.md Swarm Agents..." },
+      { p: 85, msg: "Calibrating v4 Anti-MEV Gravity Hooks..." },
+      { p: 100, msg: "Swarm Synchronized. Welcome!" }
+    ];
+
+    const loadInterval = setInterval(() => {
+      loadProgress += 4;
+      if (loadProgress > 100) loadProgress = 100;
+      
+      loaderBar.style.width = loadProgress + '%';
+      loaderPercent.innerText = loadProgress + '%';
+
+      for (let step of loaderSteps) {
+        if (loadProgress >= step.p) {
+          loaderStatus.innerText = step.msg;
+        }
+      }
+
+      if (loadProgress >= 100) {
+        clearInterval(loadInterval);
+        setTimeout(() => {
+          preloader.style.opacity = '0';
+          setTimeout(() => {
+            preloader.style.display = 'none';
+          }, 700);
+        }, 300);
+      }
+    }, 40);
+
+    // ----------------------------------------------------
+    // 1. AUDIO CONTROLLER (Starts Muted)
+    // ----------------------------------------------------
     const bgm = document.getElementById('bgm');
     let isPlaying = false;
     bgm.volume = 0.35;
@@ -369,11 +448,13 @@
           document.getElementById('audio-icon').innerText = '🔊';
           document.getElementById('audio-label').innerText = 'Playing';
           document.getElementById('soundwave').classList.remove('hidden');
-        }).catch(err => console.log('Audio autoplay blocked:', err));
+        }).catch(err => console.log('Audio playback prevented:', err));
       }
     }
 
-    // 2. Copy CA
+    // ----------------------------------------------------
+    // 2. COPY CONTRACT ADDRESS
+    // ----------------------------------------------------
     function copyCA() {
       navigator.clipboard.writeText(CONFIG.CA).then(() => {
         const btn = document.getElementById('copy-btn');
@@ -386,7 +467,9 @@
       });
     }
 
-    // 3. Tab Switcher
+    // ----------------------------------------------------
+    // 3. TAB CONTROLLER
+    // ----------------------------------------------------
     function switchTab(tabId) {
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
       document.querySelectorAll('.tab-btn').forEach(b => {
@@ -400,14 +483,18 @@
       activeBtn.classList.add('bg-emerald-500/20', 'text-emerald-300', 'border', 'border-emerald-500/40');
     }
 
-    // 4. Safe Trade Calculator
+    // ----------------------------------------------------
+    // 4. TRADE CALCULATOR
+    // ----------------------------------------------------
     function runCalculator() {
       const val = parseFloat(document.getElementById('calc-input').value) || 0;
       const rate = 5000000;
       document.getElementById('calc-output').value = '~ ' + Math.floor(val * rate).toLocaleString();
     }
 
-    // 5. On-Chain Telemetry
+    // ----------------------------------------------------
+    // 5. ON-CHAIN TELEMETRY (LIVE BLOCK & STATS)
+    // ----------------------------------------------------
     async function fetchLiveStats() {
       try {
         const rpcRes = await fetch(CONFIG.RPC_URL, {
@@ -462,7 +549,9 @@
     setInterval(fetchLiveStats, 20000);
     setInterval(fetchCryptoPrices, 60000);
 
-    // 6. Arcade Mini-Game (Canvas & 8-Bit Web Audio)
+    // ----------------------------------------------------
+    // 6. ARCADE MINI-GAME (MASCOT DEFENDER & 8-BIT SYNTH)
+    // ----------------------------------------------------
     const gCanvas = document.getElementById('game-canvas');
     const gCtx = gCanvas.getContext('2d');
     let gameRunning = false;
@@ -470,6 +559,10 @@
     let combo = 1;
     let highScore = localStorage.getItem('snewt_high') || 0;
     document.getElementById('game-high').innerText = highScore;
+
+    // Load Official Mascot for the Shooter
+    const mascotImg = new Image();
+    mascotImg.src = 'logo.png';
 
     let audioCtx = null;
     function play8BitSound(type) {
@@ -578,7 +671,8 @@
       const targetX = (e.clientX - rect.left) * scaleX;
       const targetY = (e.clientY - rect.top) * scaleY;
 
-      apples.push(new AppleProjectile(gCanvas.width / 2, gCanvas.height - 20, targetX, targetY));
+      // Shoot apple from the Newton Pepe mascot shooter
+      apples.push(new AppleProjectile(gCanvas.width / 2, gCanvas.height - 40, targetX, targetY));
       play8BitSound('shoot');
     });
 
@@ -586,15 +680,35 @@
       gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
 
       if (gameRunning) {
-        gCtx.font = "28px sans-serif";
-        gCtx.textAlign = "center";
-        gCtx.fillText("🏛️", gCanvas.width / 2, gCanvas.height - 8);
+        // DRAW OFFICIAL MASCOT SHOOTER AT BOTTOM
+        const mSize = 52;
+        const mX = gCanvas.width / 2 - mSize / 2;
+        const mY = gCanvas.height - mSize - 6;
 
+        gCtx.save();
+        // Circular clip with golden border for mascot
+        gCtx.beginPath();
+        gCtx.arc(gCanvas.width / 2, mY + mSize / 2, mSize / 2, 0, Math.PI * 2);
+        gCtx.lineWidth = 3;
+        gCtx.strokeStyle = '#f59e0b';
+        gCtx.stroke();
+        gCtx.clip();
+        if (mascotImg.complete && mascotImg.naturalWidth > 0) {
+          gCtx.drawImage(mascotImg, mX, mY, mSize, mSize);
+        } else {
+          gCtx.font = "28px sans-serif";
+          gCtx.textAlign = "center";
+          gCtx.fillText("🐸", gCanvas.width / 2, gCanvas.height - 10);
+        }
+        gCtx.restore();
+
+        // Spawn enemies
         spawnTimer++;
         if (spawnTimer % 45 === 0) {
           enemies.push(new MEVBotEnemy());
         }
 
+        // Update Apples
         for (let i = apples.length - 1; i >= 0; i--) {
           const a = apples[i];
           a.update();
@@ -625,12 +739,13 @@
           }
         }
 
+        // Update Enemies
         for (let i = enemies.length - 1; i >= 0; i--) {
           const e = enemies[i];
           e.update();
           e.draw();
 
-          if (e.y > gCanvas.height - 15) {
+          if (e.y > gCanvas.height - 40) {
             gameOver();
             break;
           }
@@ -641,7 +756,9 @@
     }
     gameLoop();
 
-    // 7. Ambient Particle Field
+    // ----------------------------------------------------
+    // 7. AMBIENT PARTICLE FIELD
+    // ----------------------------------------------------
     const bgCanvas = document.getElementById('bg-canvas');
     const bgCtx = bgCanvas.getContext('2d');
     let bWidth = bgCanvas.width = window.innerWidth;

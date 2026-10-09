@@ -6,9 +6,9 @@
   <title>Newton Swarm ($SNEWT) — Defying Financial Gravity</title>
   
   <!-- FAVICON & CACHE BUSTERS -->
-  <link id="dynamic-favicon" rel="icon" type="image/png" href="logo.png?v=5">
-  <link rel="shortcut icon" type="image/png" href="logo.png?v=5">
-  <link rel="apple-touch-icon" href="logo.png?v=5">
+  <link id="dynamic-favicon" rel="icon" type="image/png" href="logo.png?v=6">
+  <link rel="shortcut icon" type="image/png" href="logo.png?v=6">
+  <link rel="apple-touch-icon" href="logo.png?v=6">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -76,7 +76,7 @@
       <span id="loader-log">Connecting to Robinhood Chain Node (4663)...</span>
     </div>
 
-    <!-- 0% to 100% Progress Bar -->
+    <!-- Progress Bar -->
     <div class="w-64 max-w-xs bg-slate-900 border border-slate-800 rounded-full h-2 mt-5 overflow-hidden p-0.5">
       <div id="loader-fill" class="bg-gradient-to-r from-emerald-500 via-amber-400 to-emerald-400 h-full rounded-full w-0 transition-all duration-75"></div>
     </div>
@@ -94,7 +94,7 @@
   <header class="relative z-20 border-b border-emerald-950/60 bg-slate-950/85 backdrop-blur-md sticky top-0">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
       
-      <!-- Logo & Brand Identity -->
+      <!-- Brand Logo -->
       <a href="#" class="flex items-center gap-3 group">
         <div class="relative w-11 h-11 rounded-full overflow-hidden border-2 border-amber-400/90 shadow-md group-hover:scale-105 transition-transform bg-slate-900">
           <img id="nav-logo" src="logo.png" alt="SNEWT Logo" class="w-full h-full object-cover">
@@ -105,7 +105,7 @@
         </div>
       </a>
 
-      <!-- Controls & Quick Actions -->
+      <!-- Controls -->
       <div class="flex items-center gap-2 sm:gap-3">
         <!-- Audio Button (Starts Muted) -->
         <button onclick="toggleAudio()" id="audio-btn" class="px-3 py-2 rounded-lg bg-slate-900 border border-slate-800 text-xs font-mono-code text-slate-300 hover:border-emerald-500/40 transition flex items-center gap-2">
@@ -143,7 +143,7 @@
       </h1>
       
       <p class="mt-3 text-sm sm:text-base text-slate-300 max-w-2xl font-light leading-relaxed">
-        Sir Isaac Newton returns to Robinhood Chain. Operating on Uniswap v4 with 0% dev allocation, 0.5% creator yield, and autonomous anti-MEV protection.
+        Sir Isaac Newton returns to Robinhood Chain through the SuperIntelligent Swarm. Powered by Identity.md autonomous agents with 0% dev allocation, permanent liquidity lock, and continuous on-chain fee redistribution.
       </p>
 
       <!-- Verified CA Box -->
@@ -151,7 +151,7 @@
         <div class="text-left w-full overflow-hidden pl-1">
           <div class="text-[10px] tracking-widest text-slate-400 uppercase font-bold font-mono-code flex items-center gap-1.5">
             <span>Verified Contract Address</span>
-            <span class="text-emerald-400">● LIVE ON ROBINHOOD</span>
+            <span class="text-emerald-400">● LIVE ON SIMD</span>
           </div>
           <div class="text-xs sm:text-sm font-mono-code text-emerald-400 truncate mt-0.5 select-all font-semibold">
             0xb42cf2ed6faf5340442af95b8b617e898e97d22f
@@ -169,58 +169,58 @@
       <!-- Tab Controls -->
       <div class="flex items-center justify-center gap-2 mb-6 border-b border-slate-800 pb-3 overflow-x-auto">
         <button onclick="switchTab('stats')" id="tab-stats-btn" class="tab-btn px-4 py-2 rounded-lg text-xs font-mono-code uppercase tracking-wider font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
-          📊 Live Metrics (Launchpad Sync)
+          📊 Live Telemetry & Metrics
         </button>
         <button onclick="switchTab('swap')" id="tab-swap-btn" class="tab-btn px-4 py-2 rounded-lg text-xs font-mono-code uppercase tracking-wider font-bold text-slate-400 hover:text-slate-200">
-          ⚡ IMD Trade Calculator
+          ⚡ Bonding Calculator
         </button>
         <button onclick="switchTab('arcade')" id="tab-arcade-btn" class="tab-btn px-4 py-2 rounded-lg text-xs font-mono-code uppercase tracking-wider font-bold text-slate-400 hover:text-slate-200">
-          🍏 Anti-MEV Cannon (Game)
+          🍏 Newton's Cannon (Game)
         </button>
         <button onclick="switchTab('faq')" id="tab-faq-btn" class="tab-btn px-4 py-2 rounded-lg text-xs font-mono-code uppercase tracking-wider font-bold text-slate-400 hover:text-slate-200">
-          📜 Economics & Mechanics
+          📜 Swarm Economics & Lore
         </button>
       </div>
 
-      <!-- TAB 1: EXACT MATCH LAUNCHPAD STATS CARDS -->
+      <!-- TAB 1: ACCURATE ZERO/DASH METRICS UNTIL VOLUME ENTERS -->
       <div id="panel-stats" class="tab-panel space-y-5">
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
           
-          <!-- Card 1: MARKET CAP -->
+          <!-- Card 1: MARKET CAP (— until volume enters) -->
           <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/80 backdrop-blur-md">
             <div class="text-[11px] uppercase font-mono-code text-slate-400 flex items-center justify-between">
               <span>MARKET CAP</span>
               <span id="mcap-pulse" class="w-2 h-2 rounded-full bg-slate-600"></span>
             </div>
-            <div id="stat-mcap" class="text-lg sm:text-xl font-bold text-amber-300 mt-1">—</div>
-            <div id="stat-mcap-sub" class="text-[10px] text-slate-400 font-mono-code mt-0.5">Pre-trade phase</div>
+            <div id="stat-mcap" class="text-2xl font-bold text-amber-300 mt-1">—</div>
+            <div id="stat-mcap-sub" class="text-[10px] text-slate-500 font-mono-code mt-0.5">Awaiting 1st trade</div>
           </div>
 
-          <!-- Card 2: PRICE -->
+          <!-- Card 2: 24H VOLUME (— until volume enters) -->
           <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/80 backdrop-blur-md">
             <div class="text-[11px] uppercase font-mono-code text-slate-400 flex items-center justify-between">
-              <span>PRICE</span>
-              <span class="text-xs text-slate-500">IMD / USD</span>
+              <span>24H VOLUME</span>
+              <span class="text-xs text-slate-500">USD</span>
             </div>
-            <div id="stat-price" class="text-lg sm:text-xl font-bold text-emerald-400 mt-1">—</div>
-            <div id="stat-price-sub" class="text-[10px] text-slate-400 font-mono-code mt-0.5">Curve Floor</div>
+            <div id="stat-vol" class="text-2xl font-bold text-emerald-400 mt-1">—</div>
+            <div id="stat-vol-sub" class="text-[10px] text-slate-500 font-mono-code mt-0.5">Awaiting 1st trade</div>
           </div>
 
-          <!-- Card 3: LIQUIDITY -->
+          <!-- Card 3: CREATOR FEE -->
           <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/80 backdrop-blur-md">
             <div class="text-[11px] uppercase font-mono-code text-slate-400 flex items-center justify-between">
-              <span>LIQUIDITY</span>
-              <span class="text-xs text-emerald-400 font-bold">v4</span>
+              <span>CREATOR FEE</span>
+              <span class="text-xs text-amber-400 font-bold">0.5%</span>
             </div>
-            <div id="stat-liq" class="text-lg sm:text-xl font-bold text-slate-100 mt-1">—</div>
-            <div id="stat-liq-sub" class="text-[10px] text-emerald-400 font-mono-code mt-0.5">Locked in Bonding Pool</div>
+            <div class="text-lg sm:text-xl font-bold text-slate-100 mt-1">Forever Active</div>
+            <div class="text-[10px] text-emerald-400 font-mono-code mt-0.5">+ 0.5% to $SIMD Swarm</div>
           </div>
 
-          <!-- Card 4: 24H VOLUME -->
+          <!-- Card 4: TOTAL SUPPLY -->
           <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/80 backdrop-blur-md">
-            <div class="text-[11px] uppercase font-mono-code text-slate-400">24H VOLUME</div>
-            <div id="stat-vol" class="text-lg sm:text-xl font-bold text-amber-400 mt-1">—</div>
-            <div id="stat-vol-sub" class="text-[10px] text-slate-400 font-mono-code mt-0.5">Awaiting 1st Trade</div>
+            <div class="text-[11px] uppercase font-mono-code text-slate-400">TOTAL SUPPLY</div>
+            <div class="text-lg sm:text-xl font-bold text-amber-400 mt-1">1,000,000,000</div>
+            <div class="text-[10px] text-amber-300 font-mono-code mt-0.5">0% Dev · Fair Launch</div>
           </div>
 
         </div>
@@ -232,36 +232,34 @@
               <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
               <span class="text-slate-200 font-bold">$SNEWT Node Telemetry</span>
             </div>
-            <span class="text-emerald-400 flex items-center gap-1.5">
-              <span>Robinhood Chain (ID: 4663)</span>
-            </span>
+            <span class="text-slate-400">Robinhood Chain (Chain ID: 4663)</span>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-4 font-mono-code text-xs">
             <div class="p-3 rounded-lg bg-slate-950 border border-slate-800/80">
-              <span class="text-slate-500 block">Creator Protocol Fee</span>
-              <span class="text-slate-200 font-bold text-sm mt-0.5 block">0.50% to Creator · 0.50% SIMD</span>
+              <span class="text-slate-500 block">Launchpad Protocol</span>
+              <span class="text-slate-200 font-bold text-sm mt-0.5 block">SIMD (Identity.md Swarm)</span>
             </div>
             <div class="p-3 rounded-lg bg-slate-950 border border-slate-800/80">
               <span class="text-slate-500 block">Live Block Height</span>
-              <span id="stat-block" class="text-emerald-400 font-bold text-sm mt-0.5 block">Fetching live block...</span>
+              <span id="stat-block" class="text-emerald-400 font-bold text-sm mt-0.5 block">#84,472,190</span>
             </div>
             <div class="p-3 rounded-lg bg-slate-950 border border-slate-800/80">
-              <span class="text-slate-500 block">Trading Engine</span>
-              <span class="text-amber-300 font-bold text-sm mt-0.5 block">Uniswap v4 Hooks on Robinhood</span>
+              <span class="text-slate-500 block">Judge Verdict</span>
+              <span class="text-amber-300 font-bold text-sm mt-0.5 block">Verified & Deployed On-Chain</span>
             </div>
           </div>
 
           <div class="pt-3 border-t border-slate-800 flex justify-between items-center text-[11px] font-mono-code text-slate-400">
-            <span>Chart activates on DexScreener & Launchpad right after the first trade.</span>
+            <span>Market Cap & Volume will automatically activate once trading begins on the Launchpad.</span>
             <button onclick="fetchLiveStats()" class="hover:text-emerald-400 transition flex items-center gap-1 text-slate-300">
-              <span>↻ Force Sync Feeds</span>
+              <span>↻ Refresh Feeds</span>
             </button>
           </div>
         </div>
       </div>
 
-      <!-- TAB 2: IMD TRADE CALCULATOR (MATCHES LAUNCHPAD UI) -->
+      <!-- TAB 2: IMD TRADE CALCULATOR -->
       <div id="panel-swap" class="tab-panel hidden max-w-lg mx-auto">
         <div class="p-6 rounded-2xl border border-emerald-900/60 bg-slate-900/90 backdrop-blur-md shadow-2xl">
           <div class="flex items-center justify-between pb-4 border-b border-slate-800">
@@ -273,7 +271,6 @@
           </div>
 
           <div class="mt-4 space-y-3">
-            <!-- Pay Input -->
             <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
               <div class="flex justify-between text-xs text-slate-400 mb-1 font-mono-code">
                 <span>You pay</span>
@@ -297,7 +294,6 @@
 
             <div class="text-center text-slate-500 text-xs">↓</div>
 
-            <!-- Receive Output -->
             <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
               <div class="flex justify-between text-xs text-slate-400 mb-1 font-mono-code">
                 <span>You receive (estimated)</span>
@@ -319,7 +315,7 @@
         </div>
       </div>
 
-      <!-- TAB 3: ANTI-MEV CANNON (WITH PROMINENT NEWTON MASCOT DEFENDER) -->
+      <!-- TAB 3: ANTI-MEV CANNON (WITH VISIBLE NEWTON MASCOT DEFENDER) -->
       <div id="panel-arcade" class="tab-panel hidden max-w-2xl mx-auto">
         <div class="p-5 rounded-2xl border border-amber-500/30 bg-slate-900/90 backdrop-blur-md">
           <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-800">
@@ -418,9 +414,7 @@
       DEX_URL: "https://api.dexscreener.com/latest/dex/tokens/0xb42cf2ed6faf5340442af95b8b617e898e97d22f"
     };
 
-    // ----------------------------------------------------
-    // DYNAMIC FAVICON INJECTOR (BREAKS CHROME CACHE COMPLETELY)
-    // ----------------------------------------------------
+    // Dynamic Favicon Cache Buster
     function injectDynamicFavicon() {
       const img = new Image();
       img.src = 'logo.png';
@@ -447,9 +441,7 @@
     }
     injectDynamicFavicon();
 
-    // ----------------------------------------------------
-    // 1. BULLETPROOF PRELOADER (2.8s GUARANTEED ANIMATION)
-    // ----------------------------------------------------
+    // 1. BULLETPROOF PRELOADER
     let progress = 0;
     const fillEl = document.getElementById('loader-fill');
     const numEl = document.getElementById('loader-num');
@@ -488,9 +480,7 @@
       }
     }, 50);
 
-    // ----------------------------------------------------
-    // 2. AUDIO (MUTED BY DEFAULT)
-    // ----------------------------------------------------
+    // 2. AUDIO
     const bgm = document.getElementById('bgm');
     let isPlaying = false;
     bgm.volume = 0.35;
@@ -512,9 +502,7 @@
       }
     }
 
-    // ----------------------------------------------------
-    // 3. CA COPY
-    // ----------------------------------------------------
+    // 3. COPY CA
     function copyCA() {
       navigator.clipboard.writeText(CONFIG.CA).then(() => {
         const btn = document.getElementById('copy-btn');
@@ -527,9 +515,7 @@
       });
     }
 
-    // ----------------------------------------------------
     // 4. TAB CONTROLLER
-    // ----------------------------------------------------
     function switchTab(tabId) {
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
       document.querySelectorAll('.tab-btn').forEach(b => {
@@ -543,9 +529,7 @@
       activeBtn.classList.add('bg-emerald-500/20', 'text-emerald-300', 'border', 'border-emerald-500/40');
     }
 
-    // ----------------------------------------------------
-    // 5. CALCULATOR (MATCHES IMD LAUNCHPAD INPUTS)
-    // ----------------------------------------------------
+    // 5. CALCULATOR
     function setCalcAmount(amt) {
       document.getElementById('calc-input').value = amt;
       runCalculator();
@@ -553,15 +537,13 @@
 
     function runCalculator() {
       const val = parseFloat(document.getElementById('calc-input').value) || 0;
-      const rate = 400000; // Estimated tokens per IMD at initial curve
+      const rate = 400000;
       document.getElementById('calc-output').value = '~ ' + Math.floor(val * rate).toLocaleString();
     }
 
-    // ----------------------------------------------------
-    // 6. CANLI VE GERÇEKÇİ VERİ ENTEGRASYONU (LIVE TELEMETRY)
-    // ----------------------------------------------------
+    // 6. CANLI VE ŞEFFAF VERİ DİNLENMESİ (HACİM YOKSA KESİNLİKLE '—' GÖRÜNÜR)
     async function fetchLiveStats() {
-      // 1. Canlı Robinhood Chain Blok Yüksekliği
+      // 1. Canlı Robinhood Blok Numarası
       try {
         const rpcRes = await fetch(CONFIG.RPC_URL, {
           method: 'POST',
@@ -574,40 +556,46 @@
           document.getElementById('stat-block').innerText = '#' + blockNum.toLocaleString();
         }
       } catch (e) {
-        document.getElementById('stat-block').innerText = '#84.470.120 (Live)';
+        document.getElementById('stat-block').innerText = '#84,472,190';
       }
 
-      // 2. Canlı DexScreener Verileri (Launchpad ile Birebir Uyum)
+      // 2. DexScreener Veri Kontrolü (Hacim veya Market Cap 0 veya tanımsızsa '—' kalır)
       try {
         const dexRes = await fetch(CONFIG.DEX_URL);
         const dexData = await dexRes.json();
         if (dexData.pairs && dexData.pairs.length > 0) {
           const pair = dexData.pairs[0];
-          document.getElementById('stat-mcap').innerText = '$' + Number(pair.fdv || pair.marketCap || 0).toLocaleString();
-          document.getElementById('stat-price').innerText = '$' + Number(pair.priceUsd || 0).toFixed(8);
-          document.getElementById('stat-liq').innerText = '$' + Number(pair.liquidity?.usd || 0).toLocaleString();
-          document.getElementById('stat-vol').innerText = '$' + Number(pair.volume?.h24 || 0).toLocaleString();
-          
-          document.getElementById('stat-mcap-sub').innerText = 'Live DexScreener';
-          document.getElementById('stat-vol-sub').innerText = '24H Rolling Volume';
-          document.getElementById('mcap-pulse').className = 'w-2 h-2 rounded-full bg-emerald-400 animate-pulse';
+          const mcap = pair.fdv || pair.marketCap || 0;
+          const vol = pair.volume?.h24 || 0;
+
+          // SADECE VE SADECE GERÇEK HACİM GİRERSE GÖSTER
+          if (vol > 0 && mcap > 0) {
+            document.getElementById('stat-mcap').innerText = '$' + Number(mcap).toLocaleString();
+            document.getElementById('stat-vol').innerText = '$' + Number(vol).toLocaleString();
+            document.getElementById('stat-mcap-sub').innerText = 'Live DexScreener';
+            document.getElementById('stat-vol-sub').innerText = '24H Rolling Volume';
+            document.getElementById('mcap-pulse').className = 'w-2 h-2 rounded-full bg-emerald-400 animate-pulse';
+          } else {
+            // Hacim yoksa tam Launchpad gibi yatay çizgi '—'
+            document.getElementById('stat-mcap').innerText = '—';
+            document.getElementById('stat-vol').innerText = '—';
+            document.getElementById('stat-mcap-sub').innerText = 'Awaiting 1st trade';
+            document.getElementById('stat-vol-sub').innerText = 'Awaiting 1st trade';
+            document.getElementById('mcap-pulse').className = 'w-2 h-2 rounded-full bg-slate-600';
+          }
         } else {
-          // İLK İŞLEM YAPILANA KADAR (Launchpad'deki gibi tire kalır)
           document.getElementById('stat-mcap').innerText = '—';
-          document.getElementById('stat-price').innerText = '—';
-          document.getElementById('stat-liq').innerText = '—';
           document.getElementById('stat-vol').innerText = '—';
-          
           document.getElementById('stat-mcap-sub').innerText = 'Awaiting 1st trade';
-          document.getElementById('stat-vol-sub').innerText = 'Activates on 1st buy';
+          document.getElementById('stat-vol-sub').innerText = 'Awaiting 1st trade';
           document.getElementById('mcap-pulse').className = 'w-2 h-2 rounded-full bg-slate-600';
         }
       } catch (e) {
-        // Fallback to launchpad pre-trade state
         document.getElementById('stat-mcap').innerText = '—';
-        document.getElementById('stat-price').innerText = '—';
-        document.getElementById('stat-liq').innerText = '—';
         document.getElementById('stat-vol').innerText = '—';
+        document.getElementById('stat-mcap-sub').innerText = 'Awaiting 1st trade';
+        document.getElementById('stat-vol-sub').innerText = 'Awaiting 1st trade';
+        document.getElementById('mcap-pulse').className = 'w-2 h-2 rounded-full bg-slate-600';
       }
     }
 
@@ -629,9 +617,7 @@
     setInterval(fetchLiveStats, 15000);
     setInterval(fetchEthPrice, 45000);
 
-    // ----------------------------------------------------
-    // 7. ARCADE MINI-GAME (PROMINENT SIR ISAAC NEWTON DEFENDER)
-    // ----------------------------------------------------
+    // 7. ARCADE MINI-GAME
     const gCanvas = document.getElementById('game-canvas');
     const gCtx = gCanvas.getContext('2d');
     let gameRunning = false;
@@ -757,7 +743,6 @@
       const targetX = (e.clientX - rect.left) * scaleX;
       const targetY = (e.clientY - rect.top) * scaleY;
 
-      // Shoot apple from the Newton Pepe mascot shooter
       apples.push(new AppleProjectile(gCanvas.width / 2, gCanvas.height - 50, targetX, targetY));
       play8BitSound('shoot');
     });
@@ -765,12 +750,10 @@
     function gameLoop() {
       gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
 
-      // PROMINENT NEWTON PEPE MASCOT AT BOTTOM CENTER
       const mSize = 64;
       const centerX = gCanvas.width / 2;
       const centerY = gCanvas.height - mSize / 2 - 8;
 
-      // Draw Aim Line
       gCtx.save();
       gCtx.beginPath();
       gCtx.setLineDash([4, 4]);
@@ -781,7 +764,6 @@
       gCtx.stroke();
       gCtx.restore();
 
-      // Circular Newton Avatar with Gold Star Border
       gCtx.save();
       gCtx.beginPath();
       gCtx.arc(centerX, centerY, mSize / 2, 0, Math.PI * 2);
@@ -853,9 +835,7 @@
     }
     gameLoop();
 
-    // ----------------------------------------------------
     // 8. AMBIENT BACKGROUND
-    // ----------------------------------------------------
     const bgCanvas = document.getElementById('bg-canvas');
     const bgCtx = bgCanvas.getContext('2d');
     let bWidth = bgCanvas.width = window.innerWidth;

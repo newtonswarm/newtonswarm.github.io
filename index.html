@@ -6,9 +6,9 @@
   <title>Newton Swarm ($SNEWT) — Royal Mint & Autonomous Gravity Portal</title>
   
   <!-- FAVICON & CACHE BUSTER -->
-  <link id="dynamic-favicon" rel="icon" type="image/png" href="logo.png?v=8">
-  <link rel="shortcut icon" type="image/png" href="logo.png?v=8">
-  <link rel="apple-touch-icon" href="logo.png?v=8">
+  <link id="dynamic-favicon" rel="icon" type="image/png" href="logo.png?v=9">
+  <link rel="shortcut icon" type="image/png" href="logo.png?v=9">
+  <link rel="apple-touch-icon" href="logo.png?v=9">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +29,12 @@
       font-family: 'Space Grotesk', sans-serif;
     }
 
-    body { font-family: 'Space Grotesk', sans-serif; background-color: #030712; color: #f8fafc; }
+    body { 
+      font-family: 'Space Grotesk', sans-serif; 
+      background-color: #030712; 
+      color: #f8fafc; 
+      transition: background 0.8s ease;
+    }
     .font-serif-title { font-family: 'Cinzel', serif; }
     .font-mono-code { font-family: 'JetBrains Mono', monospace; }
     
@@ -45,6 +50,26 @@
       height: 100vh;
       z-index: 0;
       pointer-events: none;
+    }
+
+    /* Dramatic Atmosphere Overlay */
+    #atmosphere-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      transition: all 0.8s ease;
+    }
+
+    .weather-fog {
+      background: radial-gradient(circle at 50% 30%, rgba(15, 23, 42, 0.45) 0%, rgba(2, 6, 23, 0.85) 100%);
+      backdrop-filter: blur(1.5px);
+    }
+    .weather-lanterns {
+      background: radial-gradient(circle at 50% 20%, rgba(245, 158, 11, 0.15) 0%, rgba(15, 10, 2, 0.7) 70%, rgba(3, 7, 18, 0.95) 100%);
+    }
+    .weather-midnight {
+      background: radial-gradient(circle at 50% 10%, rgba(59, 130, 246, 0.18) 0%, rgba(15, 23, 42, 0.8) 60%, rgba(2, 6, 23, 0.98) 100%);
     }
 
     .bar-anim { animation: soundWave 0.8s ease-in-out infinite alternate; }
@@ -73,7 +98,7 @@
     
     <div class="mt-2 text-xs font-mono-code text-slate-400 flex items-center gap-2">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-      <span id="loader-log">Loading 1720 Royal Mint & Swarm Infrastructure...</span>
+      <span id="loader-log">Calibrating Spacetime Curvature & v4 Hooks...</span>
     </div>
 
     <div class="w-64 max-w-xs bg-slate-900 border border-slate-800 rounded-full h-2 mt-5 overflow-hidden p-0.5">
@@ -83,8 +108,9 @@
     <div class="mt-2 text-xs font-mono-code text-emerald-400 font-bold" id="loader-num">0%</div>
   </div>
 
-  <!-- Background Environment Engine -->
+  <!-- Ambient Environment & Weather Engine Layers -->
   <canvas id="bg-canvas"></canvas>
+  <div id="atmosphere-layer" class="weather-fog"></div>
 
   <!-- Audio Element -->
   <audio id="bgm" src="bgm.mp3" loop preload="auto"></audio>
@@ -106,11 +132,11 @@
 
       <!-- Quick Actions -->
       <div class="flex items-center gap-2 sm:gap-3">
-        <!-- Weather Atmosphere Selector -->
-        <div class="hidden md:flex items-center gap-1 p-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono-code">
-          <button onclick="setWeather('fog')" id="weather-fog-btn" class="px-2 py-1 rounded bg-slate-800 text-slate-200">🌫️ Fog</button>
-          <button onclick="setWeather('lanterns')" id="weather-lanterns-btn" class="px-2 py-1 rounded text-slate-400 hover:text-slate-200">🏮 Gold</button>
-          <button onclick="setWeather('midnight')" id="weather-midnight-btn" class="px-2 py-1 rounded text-slate-400 hover:text-slate-200">🌌 Midnight</button>
+        <!-- Weather Atmosphere Controls -->
+        <div class="flex items-center gap-1 p-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono-code">
+          <button onclick="setWeather('fog')" id="weather-fog-btn" class="px-2.5 py-1 rounded bg-slate-800 text-emerald-300 font-bold border border-emerald-500/30">🌫️ Fog</button>
+          <button onclick="setWeather('lanterns')" id="weather-lanterns-btn" class="px-2.5 py-1 rounded text-slate-400 hover:text-amber-300">🏮 Gold</button>
+          <button onclick="setWeather('midnight')" id="weather-midnight-btn" class="px-2.5 py-1 rounded text-slate-400 hover:text-blue-300">🌌 Midnight</button>
         </div>
 
         <!-- Audio Controller -->
@@ -213,7 +239,7 @@
               </a>
               <a href="#/lab" class="p-3 rounded-xl bg-slate-950 border border-slate-800 hover:border-emerald-400/50 transition block">
                 <span class="text-emerald-400 font-bold block">🍏 Gravity Lab</span>
-                <span class="text-slate-400 text-[11px]">Interactive bonding physics simulator</span>
+                <span class="text-slate-400 text-[11px]">Spacetime curvature bonding simulator</span>
               </a>
               <a href="#/terminal" class="p-3 rounded-xl bg-slate-950 border border-slate-800 hover:border-blue-400/50 transition block">
                 <span class="text-blue-400 font-bold block">🔭 Sentinel Radar</span>
@@ -222,12 +248,12 @@
             </div>
           </div>
 
-          <!-- Radio & Weather Card -->
+          <!-- Radio & Weather Status Card -->
           <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/80 backdrop-blur-md flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between pb-3 border-b border-slate-800">
                 <span class="font-serif-title text-sm text-slate-200 font-bold">Baroque Lo-Fi Radio</span>
-                <span class="text-[10px] font-mono-code text-emerald-400">LIVE FEED</span>
+                <span class="text-[10px] font-mono-code text-emerald-400">LIVE SYNTH</span>
               </div>
               <p class="text-xs text-slate-400 mt-2">Ambient classical synth calibrated for deep mathematical modeling.</p>
               <div class="mt-4 p-3 rounded-xl bg-slate-950 border border-slate-800 text-center">
@@ -343,7 +369,6 @@
             <span class="text-emerald-400">800/800 NODES ONLINE</span>
           </div>
 
-          <!-- Console Output Screen -->
           <div id="terminal-screen" class="mt-4 h-64 overflow-y-auto space-y-1.5 text-xs text-slate-300 pr-2">
             <div class="text-slate-500">Initializing Royal Mint Mempool Defense Subsystem...</div>
             <div class="text-emerald-400">[OK] 800 Identity.md autonomous agents synchronized.</div>
@@ -352,7 +377,6 @@
             <div class="border-b border-slate-900 my-2"></div>
           </div>
 
-          <!-- Interactive Command Prompt -->
           <form onsubmit="handleTerminalCmd(event)" class="mt-3 pt-3 border-t border-slate-900 flex items-center gap-2">
             <span class="text-emerald-400 font-bold text-xs">newton@mint-core:~$</span>
             <input type="text" id="terminal-input" placeholder="Type help, scan, vote, stats, clear..." autocomplete="off" class="bg-transparent text-xs text-white focus:outline-none w-full font-mono-code">
@@ -360,43 +384,95 @@
         </div>
       </div>
 
-      <!-- ================= ROUTE 4: GRAVITY LAB ================= -->
-      <div id="view-lab" class="view-panel hidden max-w-4xl mx-auto space-y-4">
-        <div class="p-6 rounded-2xl border border-emerald-500/30 bg-slate-900/90 backdrop-blur-md">
-          <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-800">
+      <!-- ================= ROUTE 4: ADVANCED GRAVITY LAB (SPACETIME WELL) ================= -->
+      <div id="view-lab" class="view-panel hidden max-w-5xl mx-auto space-y-5">
+        <div class="p-6 rounded-2xl border border-emerald-500/30 bg-slate-900/90 backdrop-blur-md shadow-2xl">
+          
+          <!-- Header & Live Invariant HUD -->
+          <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-800">
             <div>
-              <h2 class="font-serif-title text-xl text-amber-300 font-bold">Newton's Gravity Mechanics Lab</h2>
-              <p class="text-xs text-slate-400 font-mono-code">Interactive Uniswap v4 Bonding Invariant Simulator</p>
+              <div class="text-xs font-mono-code text-emerald-400 font-bold flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                SPACETIME CURVATURE & V4 BONDING INVARIANT
+              </div>
+              <h2 class="font-serif-title text-2xl text-amber-300 font-bold">Newton's Gravitational Well</h2>
             </div>
-            <span class="text-xs font-mono-code px-3 py-1 rounded-lg bg-slate-950 border border-slate-800 text-emerald-400">
-              Law: F = G * (m1*m2) / r²
-            </span>
+            
+            <!-- Real-time Physics Telemetry Chips -->
+            <div class="flex flex-wrap gap-2 text-[11px] font-mono-code">
+              <div class="px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-slate-300">
+                Escape Velocity: <strong id="hud-vesc" class="text-amber-300 font-bold">11.2 km/s</strong>
+              </div>
+              <div class="px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-slate-300">
+                Invariant k: <strong id="hud-k" class="text-emerald-400 font-bold">1.42e14</strong>
+              </div>
+              <div class="px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-slate-300">
+                Curvature R: <strong id="hud-r" class="text-blue-400 font-bold">0.874</strong>
+              </div>
+            </div>
           </div>
 
-          <!-- Simulator Canvas -->
+          <!-- Advanced Spacetime Canvas Simulation -->
           <div class="relative mt-4 rounded-xl overflow-hidden border border-slate-800 bg-slate-950">
-            <canvas id="lab-canvas" width="700" height="320" class="w-full h-[280px] sm:h-[320px] block"></canvas>
-            <div class="absolute bottom-3 left-3 bg-slate-950/80 px-3 py-1.5 rounded-lg border border-slate-800 text-[11px] font-mono-code text-slate-300">
-              Center Mass: <strong class="text-amber-300">$SNEWT Pool</strong> · Orbiters: <strong class="text-emerald-400">IMD Liquidity</strong>
+            <canvas id="lab-canvas" width="800" height="380" class="w-full h-[320px] sm:h-[380px] block cursor-crosshair"></canvas>
+            
+            <!-- In-Canvas Floating Info Tag -->
+            <div class="absolute top-3 left-3 bg-slate-950/85 px-3 py-1.5 rounded-lg border border-slate-800 text-[11px] font-mono-code text-slate-300 flex items-center gap-3">
+              <span>● Center: <strong class="text-amber-300">$SNEWT Singularity</strong></span>
+              <span>● Orbiters: <strong class="text-emerald-400">IMD Liquidity</strong></span>
+              <span>● Probes: <strong class="text-blue-400">800 Sentinels</strong></span>
+            </div>
+
+            <!-- Canvas Action Controls -->
+            <div class="absolute bottom-3 right-3 flex items-center gap-2">
+              <button onclick="launchMEVAttacker()" class="px-3 py-1.5 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-300 border border-red-500/40 text-xs font-mono-code font-bold transition flex items-center gap-1 shadow-lg">
+                <span>☄️ Launch MEV Bot</span>
+              </button>
+              <button onclick="triggerLiquidityPulse()" class="px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 text-xs font-mono-code font-bold transition flex items-center gap-1 shadow-lg">
+                <span>🌊 Gravitational Wave</span>
+              </button>
+              <button onclick="deploySwarmProbe()" class="px-3 py-1.5 rounded-lg bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 border border-blue-500/40 text-xs font-mono-code font-bold transition flex items-center gap-1 shadow-lg">
+                <span>🛰️ Add Sentinel Probe</span>
+              </button>
             </div>
           </div>
 
-          <!-- Simulator Controls -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 font-mono-code text-xs">
+          <!-- Interactive Physics Control Sliders -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4 font-mono-code text-xs">
+            
             <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
               <div class="flex justify-between text-slate-400 mb-1">
-                <span>Injected Liquidity (Mass M)</span>
-                <span id="lab-mass-val" class="text-emerald-400 font-bold">10 IMD</span>
+                <span>Pool Mass / Liquidity (M)</span>
+                <span id="lab-mass-val" class="text-emerald-400 font-bold">25 IMD</span>
               </div>
-              <input type="range" min="1" max="50" value="10" id="lab-mass-slider" oninput="updateLabMass()" class="w-full accent-emerald-500">
+              <input type="range" min="10" max="60" value="25" id="lab-mass-slider" oninput="updateLabParams()" class="w-full accent-emerald-500 cursor-pointer">
+              <span class="text-[10px] text-slate-500 mt-1 block">Warps the depth of the spacetime gravity well.</span>
             </div>
+
             <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
               <div class="flex justify-between text-slate-400 mb-1">
-                <span>Gravitational Resistance (Hook Penalty)</span>
-                <span id="lab-grav-val" class="text-amber-400 font-bold">40% Early Hook</span>
+                <span>v4 Anti-MEV Hook Shear</span>
+                <span id="lab-grav-val" class="text-amber-400 font-bold">40% Early</span>
               </div>
-              <input type="range" min="2" max="40" value="40" id="lab-grav-slider" oninput="updateLabGrav()" class="w-full accent-amber-400">
+              <input type="range" min="2" max="40" value="40" id="lab-grav-slider" oninput="updateLabParams()" class="w-full accent-amber-400 cursor-pointer">
+              <span class="text-[10px] text-slate-500 mt-1 block">Frictional decay tearing rogue sniper bots apart.</span>
             </div>
+
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="flex justify-between text-slate-400 mb-1">
+                <span>Simulation Time Dilation (dt)</span>
+                <span id="lab-time-val" class="text-blue-400 font-bold">1.0x Realtime</span>
+              </div>
+              <input type="range" min="5" max="25" value="10" id="lab-time-slider" oninput="updateLabParams()" class="w-full accent-blue-400 cursor-pointer">
+              <span class="text-[10px] text-slate-500 mt-1 block">Adjusts orbital velocity and particle propagation.</span>
+            </div>
+
+          </div>
+
+          <!-- Interactive Instruction Footer -->
+          <div class="pt-3 border-t border-slate-800 flex flex-wrap items-center justify-between text-[11px] font-mono-code text-slate-400">
+            <span>Click anywhere inside canvas to spawn a gravitational ripple.</span>
+            <span class="text-emerald-400">Autonomous Mathematical Equilibrium Maintained</span>
           </div>
         </div>
       </div>
@@ -575,7 +651,7 @@
     };
 
     // ----------------------------------------------------
-    // 0. DYNAMIC HASH ROUTER (NO PAGE RELOAD, URL SYNCED)
+    // 0. DYNAMIC HASH ROUTER
     // ----------------------------------------------------
     const routes = ['observatory', 'vote', 'terminal', 'lab', 'arcade', 'telemetry', 'docs'];
 
@@ -583,14 +659,12 @@
       const hash = window.location.hash.replace('#/', '') || 'observatory';
       const targetRoute = routes.includes(hash) ? hash : 'observatory';
 
-      // Hide all panels
       document.querySelectorAll('.view-panel').forEach(p => p.classList.add('hidden'));
       document.querySelectorAll('.nav-route-btn').forEach(b => {
         b.classList.remove('bg-emerald-500/20', 'text-emerald-300', 'border', 'border-emerald-500/40');
         b.classList.add('text-slate-400');
       });
 
-      // Show selected panel
       const targetView = document.getElementById('view-' + targetRoute);
       if (targetView) targetView.classList.remove('hidden');
 
@@ -598,6 +672,11 @@
       if (targetBtn) {
         targetBtn.classList.remove('text-slate-400');
         targetBtn.classList.add('bg-emerald-500/20', 'text-emerald-300', 'border', 'border-emerald-500/40');
+      }
+
+      // If entering lab, trigger canvas redraw
+      if (targetRoute === 'lab') {
+        setTimeout(resizeLabCanvas, 50);
       }
     }
 
@@ -628,7 +707,43 @@
     }, 35);
 
     // ----------------------------------------------------
-    // 2. AUDIO & BAROQUE LO-FI RADIO
+    // 2. WEATHER ATMOSPHERE CONTROLLER (HIGH VISIBILITY)
+    // ----------------------------------------------------
+    let currentWeather = 'fog';
+
+    function setWeather(mode) {
+      currentWeather = mode;
+      const atmo = document.getElementById('atmosphere-layer');
+      
+      // Remove previous classes
+      atmo.className = '';
+      
+      if (mode === 'fog') {
+        atmo.classList.add('weather-fog');
+        document.body.style.backgroundColor = '#030712';
+      } else if (mode === 'lanterns') {
+        atmo.classList.add('weather-lanterns');
+        document.body.style.backgroundColor = '#0c0702';
+      } else if (mode === 'midnight') {
+        atmo.classList.add('weather-midnight');
+        document.body.style.backgroundColor = '#020617';
+      }
+
+      // Button styling
+      ['fog', 'lanterns', 'midnight'].forEach(w => {
+        const b = document.getElementById('weather-' + w + '-btn');
+        if (b) {
+          if (w === mode) {
+            b.className = 'px-2.5 py-1 rounded bg-slate-800 text-emerald-300 font-bold border border-emerald-500/40';
+          } else {
+            b.className = 'px-2.5 py-1 rounded text-slate-400 hover:text-slate-200';
+          }
+        }
+      });
+    }
+
+    // ----------------------------------------------------
+    // 3. AUDIO CONTROLLER
     // ----------------------------------------------------
     const bgm = document.getElementById('bgm');
     let isPlaying = false;
@@ -652,7 +767,7 @@
     }
 
     // ----------------------------------------------------
-    // 3. CA COPY
+    // 4. COPY CA
     // ----------------------------------------------------
     function copyCA() {
       navigator.clipboard.writeText(CONFIG.CA).then(() => {
@@ -667,7 +782,7 @@
     }
 
     // ----------------------------------------------------
-    // 4. TREASURY VOTE MODULE (PERSISTENT IN LOCALSTORAGE)
+    // 5. TREASURY VOTE MODULE
     // ----------------------------------------------------
     let votes = JSON.parse(localStorage.getItem('snewt_votes')) || { burn: 52, dex: 33, arcade: 15 };
 
@@ -698,7 +813,7 @@
     updateVoteUI();
 
     // ----------------------------------------------------
-    // 5. INTERACTIVE TERMINAL
+    // 6. SWARM SENTINEL TERMINAL
     // ----------------------------------------------------
     const terminalScreen = document.getElementById('terminal-screen');
 
@@ -751,81 +866,272 @@
       }
     }, 4500);
 
-    // ----------------------------------------------------
-    // 6. GRAVITY MECHANICS LAB SIMULATOR
-    // ----------------------------------------------------
+    // ====================================================
+    // 7. ADVANCED GRAVITY LAB: SPACETIME CURVATURE WELL
+    // ====================================================
     const labCanvas = document.getElementById('lab-canvas');
     const labCtx = labCanvas.getContext('2d');
-    let labMass = 10;
-    let labGrav = 40;
-
-    function updateLabMass() {
-      labMass = parseInt(document.getElementById('lab-mass-slider').value);
-      document.getElementById('lab-mass-val').innerText = labMass + ' IMD';
-    }
-
-    function updateLabGrav() {
-      labGrav = parseInt(document.getElementById('lab-grav-slider').value);
-      document.getElementById('lab-grav-val').innerText = labGrav + '% Penalty';
-    }
-
-    let orbitAngle = 0;
-    function renderLab() {
-      labCtx.clearRect(0, 0, labCanvas.width, labCanvas.height);
-      const cx = labCanvas.width / 2;
-      const cy = labCanvas.height / 2;
-
-      // Draw Center Mass ($SNEWT Pool)
-      const rCenter = 20 + labMass * 0.7;
-      labCtx.beginPath();
-      labCtx.arc(cx, cy, rCenter, 0, Math.PI * 2);
-      labCtx.fillStyle = '#f59e0b';
-      labCtx.shadowColor = '#f59e0b';
-      labCtx.shadowBlur = 20;
-      labCtx.fill();
-      labCtx.shadowBlur = 0;
-
-      labCtx.font = "14px sans-serif";
-      labCtx.textAlign = "center";
-      labCtx.fillStyle = "#000";
-      labCtx.fillText("🍏", cx, cy + 5);
-
-      // Orbiting IMD Liquidity Particles
-      orbitAngle += 0.02 * (labMass / 10);
-      const orbitCount = 6;
-      for (let i = 0; i < orbitCount; i++) {
-        const offset = (Math.PI * 2 / orbitCount) * i;
-        const rad = 70 + (i * 15) - (labGrav * 0.4);
-        const px = cx + Math.cos(orbitAngle + offset) * rad;
-        const py = cy + Math.sin(orbitAngle + offset) * (rad * 0.6);
-
-        labCtx.beginPath();
-        labCtx.arc(px, py, 4, 0, Math.PI * 2);
-        labCtx.fillStyle = '#10b981';
-        labCtx.shadowColor = '#10b981';
-        labCtx.shadowBlur = 8;
-        labCtx.fill();
-        labCtx.shadowBlur = 0;
+    
+    function resizeLabCanvas() {
+      const rect = labCanvas.getBoundingClientRect();
+      if (rect.width > 0) {
+        labCanvas.width = rect.width;
+        labCanvas.height = rect.height || 380;
       }
-
-      requestAnimationFrame(renderLab);
     }
-    renderLab();
+    window.addEventListener('resize', resizeLabCanvas);
 
-    // ----------------------------------------------------
-    // 7. ENVIRONMENT & WEATHER ENGINE
-    // ----------------------------------------------------
-    let currentWeather = 'fog';
-    function setWeather(mode) {
-      currentWeather = mode;
-      ['fog', 'lanterns', 'midnight'].forEach(w => {
-        const b = document.getElementById('weather-' + w + '-btn');
-        if (b) {
-          b.className = w === mode ? 'px-2 py-1 rounded bg-slate-800 text-slate-200' : 'px-2 py-1 rounded text-slate-400 hover:text-slate-200';
-        }
+    let labMass = 25;
+    let labHookPenalty = 40;
+    let labTimeScale = 1.0;
+    let waveRipples = [];
+    let mevs = [];
+    let probes = [];
+
+    // Initialize sentinel probes
+    for (let i = 0; i < 4; i++) {
+      probes.push({
+        angle: (Math.PI * 2 / 4) * i,
+        dist: 90 + i * 22,
+        speed: 0.018 - i * 0.002,
+        size: 3
       });
     }
 
+    function updateLabParams() {
+      labMass = parseInt(document.getElementById('lab-mass-slider').value);
+      labHookPenalty = parseInt(document.getElementById('lab-grav-slider').value);
+      labTimeScale = parseInt(document.getElementById('lab-time-slider').value) / 10;
+
+      document.getElementById('lab-mass-val').innerText = labMass + ' IMD';
+      document.getElementById('lab-grav-val').innerText = labHookPenalty + '% Penalty';
+      document.getElementById('lab-time-val').innerText = labTimeScale.toFixed(1) + 'x Speed';
+
+      // Update Live Telemetry HUD values
+      const vEsc = (8.2 + (labMass * 0.22)).toFixed(1);
+      const kVal = ((labMass * 1.82) * 1e13).toExponential(2);
+      const curvature = (0.4 + (labMass / 45)).toFixed(3);
+
+      document.getElementById('hud-vesc').innerText = vEsc + ' km/s';
+      document.getElementById('hud-k').innerText = kVal;
+      document.getElementById('hud-r').innerText = curvature;
+    }
+
+    function triggerLiquidityPulse() {
+      waveRipples.push({ r: 20, maxR: 280, alpha: 1.0 });
+    }
+
+    function launchMEVAttacker() {
+      // Spawn incoming rogue bot from random edge
+      const angle = Math.random() * Math.PI * 2;
+      const startDist = Math.max(labCanvas.width, labCanvas.height) * 0.6;
+      const cx = labCanvas.width / 2;
+      const cy = labCanvas.height / 2;
+      mevs.push({
+        x: cx + Math.cos(angle) * startDist,
+        y: cy + Math.sin(angle) * startDist,
+        vx: -Math.cos(angle + 0.3) * 2.8,
+        vy: -Math.sin(angle + 0.3) * 2.8,
+        life: 1.0,
+        sheared: false
+      });
+    }
+
+    function deploySwarmProbe() {
+      probes.push({
+        angle: Math.random() * Math.PI * 2,
+        dist: 70 + Math.random() * 110,
+        speed: (Math.random() * 0.015 + 0.01) * (Math.random() > 0.5 ? 1 : -1),
+        size: 3
+      });
+    }
+
+    labCanvas.addEventListener('mousedown', (e) => {
+      const rect = labCanvas.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+      waveRipples.push({ r: 5, maxR: 150, alpha: 0.9, cx: clickX, cy: clickY });
+    });
+
+    let labSimTime = 0;
+    function renderGravityLab() {
+      labCtx.clearRect(0, 0, labCanvas.width, labCanvas.height);
+      const cx = labCanvas.width / 2;
+      const cy = labCanvas.height / 2;
+      labSimTime += 0.015 * labTimeScale;
+
+      // 1. DRAW SPACETIME WARPING GRID (EINSTEIN-NEWTON WELL)
+      const cols = 26;
+      const rows = 14;
+      const cellW = labCanvas.width / cols;
+      const cellH = labCanvas.height / rows;
+
+      // Calculate warped node positions
+      const grid = [];
+      for (let y = 0; y <= rows; y++) {
+        grid[y] = [];
+        for (let x = 0; x <= cols; x++) {
+          const ox = x * cellW;
+          const oy = y * cellH;
+          const dx = ox - cx;
+          const dy = oy - cy;
+          const dist = Math.hypot(dx, dy);
+
+          // Gravitational sag displacement toward center
+          const sagStrength = (labMass * 1400) / (dist * dist + 2400);
+          const pullAngle = Math.atan2(dy, dx);
+          const nx = ox - Math.cos(pullAngle) * sagStrength;
+          const ny = oy - Math.sin(pullAngle) * sagStrength;
+          grid[y][x] = { x: nx, y: ny, dist };
+        }
+      }
+
+      // Draw horizontal & vertical grid lines
+      labCtx.lineWidth = 1;
+      for (let y = 0; y <= rows; y++) {
+        for (let x = 0; x <= cols; x++) {
+          const pt = grid[y][x];
+          // Proximity glow
+          const alpha = Math.max(0.06, 0.4 - (pt.dist / 400));
+          labCtx.strokeStyle = `rgba(16, 185, 129, ${alpha})`;
+
+          if (x < cols) {
+            labCtx.beginPath();
+            labCtx.moveTo(pt.x, pt.y);
+            labCtx.lineTo(grid[y][x + 1].x, grid[y][x + 1].y);
+            labCtx.stroke();
+          }
+          if (y < rows) {
+            labCtx.beginPath();
+            labCtx.moveTo(pt.x, pt.y);
+            labCtx.lineTo(grid[y + 1][x].x, grid[y + 1][x].y);
+            labCtx.stroke();
+          }
+        }
+      }
+
+      // 2. DRAW GRAVITATIONAL WAVES
+      for (let i = waveRipples.length - 1; i >= 0; i--) {
+        const w = waveRipples[i];
+        const rcx = w.cx !== undefined ? w.cx : cx;
+        const rcy = w.cy !== undefined ? w.cy : cy;
+
+        labCtx.beginPath();
+        labCtx.arc(rcx, rcy, w.r, 0, Math.PI * 2);
+        labCtx.strokeStyle = `rgba(16, 185, 129, ${w.alpha * 0.7})`;
+        labCtx.lineWidth = 2;
+        labCtx.stroke();
+
+        w.r += 3.5 * labTimeScale;
+        w.alpha -= 0.015 * labTimeScale;
+        if (w.alpha <= 0 || w.r >= w.maxR) {
+          waveRipples.splice(i, 1);
+        }
+      }
+
+      // 3. DRAW EVENT HORIZON & ACCRETION DISK (SNEWT CORE)
+      const coreR = 18 + labMass * 0.5;
+
+      // Accretion halo glow
+      const grad = labCtx.createRadialGradient(cx, cy, coreR * 0.4, cx, cy, coreR * 2.2);
+      grad.addColorStop(0, 'rgba(245, 158, 11, 0.85)');
+      grad.addColorStop(0.4, 'rgba(16, 185, 129, 0.4)');
+      grad.addColorStop(1, 'rgba(3, 7, 18, 0)');
+      labCtx.fillStyle = grad;
+      labCtx.beginPath();
+      labCtx.arc(cx, cy, coreR * 2.2, 0, Math.PI * 2);
+      labCtx.fill();
+
+      // Core Solid Center
+      labCtx.beginPath();
+      labCtx.arc(cx, cy, coreR, 0, Math.PI * 2);
+      labCtx.fillStyle = '#f59e0b';
+      labCtx.shadowColor = '#f59e0b';
+      labCtx.shadowBlur = 25;
+      labCtx.fill();
+      labCtx.shadowBlur = 0;
+
+      labCtx.font = "bold 16px sans-serif";
+      labCtx.textAlign = "center";
+      labCtx.fillStyle = "#000";
+      labCtx.fillText("🍏", cx, cy + 6);
+
+      // 4. DRAW ORBITAL PROBES (SWARM SENTINELS)
+      probes.forEach(p => {
+        p.angle += p.speed * labTimeScale;
+        const px = cx + Math.cos(p.angle) * p.dist;
+        const py = cy + Math.sin(p.angle) * (p.dist * 0.65);
+
+        // Orbit trail
+        labCtx.beginPath();
+        labCtx.arc(cx, cy, p.dist, 0, Math.PI * 2);
+        labCtx.strokeStyle = 'rgba(59, 130, 246, 0.1)';
+        labCtx.lineWidth = 1;
+        labCtx.stroke();
+
+        // Sentinel Dot
+        labCtx.beginPath();
+        labCtx.arc(px, py, p.size, 0, Math.PI * 2);
+        labCtx.fillStyle = '#38bdf8';
+        labCtx.shadowColor = '#38bdf8';
+        labCtx.shadowBlur = 8;
+        labCtx.fill();
+        labCtx.shadowBlur = 0;
+      });
+
+      // 5. UPDATE & DRAW MEV ATTACKER ASTEROIDS
+      for (let i = mevs.length - 1; i >= 0; i--) {
+        const m = mevs[i];
+        const dx = cx - m.x;
+        const dy = cy - m.y;
+        const dist = Math.hypot(dx, dy);
+
+        // Gravity pull toward singularity
+        const gForce = (labMass * 65) / (dist * dist + 100);
+        m.vx += (dx / dist) * gForce * labTimeScale;
+        m.vy += (dy / dist) * gForce * labTimeScale;
+
+        // Hook friction penalty (slows and tears down bot)
+        const hookDrag = (labHookPenalty / 40) * 0.04;
+        m.vx *= (1 - hookDrag);
+        m.vy *= (1 - hookDrag);
+
+        m.x += m.vx * labTimeScale;
+        m.y += m.vy * labTimeScale;
+
+        // Tidal shear disintegration inside event horizon
+        if (dist < coreR + 15) {
+          m.sheared = true;
+          // Spawn golden absorption burst
+          waveRipples.push({ r: 5, maxR: 60, alpha: 0.9, cx: m.x, cy: m.y });
+          mevs.splice(i, 1);
+          continue;
+        }
+
+        // Draw MEV Bot Particle
+        labCtx.beginPath();
+        labCtx.arc(m.x, m.y, 4, 0, Math.PI * 2);
+        labCtx.fillStyle = '#ef4444';
+        labCtx.shadowColor = '#ef4444';
+        labCtx.shadowBlur = 12;
+        labCtx.fill();
+        labCtx.shadowBlur = 0;
+
+        // Tail
+        labCtx.beginPath();
+        labCtx.moveTo(m.x, m.y);
+        labCtx.lineTo(m.x - m.vx * 3, m.y - m.vy * 3);
+        labCtx.strokeStyle = 'rgba(239, 68, 68, 0.4)';
+        labCtx.stroke();
+      }
+
+      requestAnimationFrame(renderGravityLab);
+    }
+    renderGravityLab();
+
+    // ----------------------------------------------------
+    // 8. BACKGROUND PARTICLES (WEATHER-RESPONSIVE)
+    // ----------------------------------------------------
     const bgCanvas = document.getElementById('bg-canvas');
     const bgCtx = bgCanvas.getContext('2d');
     let bWidth = bgCanvas.width = window.innerWidth;
@@ -837,7 +1143,7 @@
     });
 
     const particles = [];
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 45; i++) {
       particles.push({
         x: Math.random() * bWidth,
         y: Math.random() * bHeight,
@@ -850,9 +1156,9 @@
     function renderBg() {
       bgCtx.clearRect(0, 0, bWidth, bHeight);
 
-      let pColor = 'rgba(16, 185, 129, 0.3)';
-      if (currentWeather === 'lanterns') pColor = 'rgba(245, 158, 11, 0.4)';
-      if (currentWeather === 'midnight') pColor = 'rgba(59, 130, 246, 0.35)';
+      let pColor = 'rgba(16, 185, 129, 0.35)';
+      if (currentWeather === 'lanterns') pColor = 'rgba(245, 158, 11, 0.45)';
+      if (currentWeather === 'midnight') pColor = 'rgba(96, 165, 250, 0.4)';
 
       particles.forEach(p => {
         p.x += p.vx;
@@ -870,7 +1176,7 @@
     renderBg();
 
     // ----------------------------------------------------
-    // 8. ON-CHAIN LIVE STATS
+    // 9. ON-CHAIN LIVE STATS
     // ----------------------------------------------------
     async function fetchLiveStats() {
       try {
@@ -922,7 +1228,7 @@
     setInterval(fetchLiveStats, 15000);
 
     // ----------------------------------------------------
-    // 9. ARCADE MINI-GAME (NEWTON PEPE DEFENDER)
+    // 10. ARCADE MINI-GAME (NEWTON PEPE DEFENDER)
     // ----------------------------------------------------
     const gCanvas = document.getElementById('game-canvas');
     const gCtx = gCanvas.getContext('2d');
@@ -1018,7 +1324,6 @@
       const centerX = gCanvas.width / 2;
       const centerY = gCanvas.height - mSize / 2 - 8;
 
-      // Aim Line
       gCtx.save();
       gCtx.beginPath();
       gCtx.setLineDash([4, 4]);
@@ -1029,7 +1334,6 @@
       gCtx.stroke();
       gCtx.restore();
 
-      // Mascot Avatar
       gCtx.save();
       gCtx.beginPath();
       gCtx.arc(centerX, centerY, mSize / 2, 0, Math.PI * 2);

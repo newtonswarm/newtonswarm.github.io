@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Newton Swarm ($SNEWT) — Autonomous Anti-MEV Portal</title>
+  <title>Newton Swarm ($SNEWT) — Royal Mint & Autonomous Gravity Portal</title>
   
-  <!-- FAVICON & CACHE BUSTERS -->
-  <link id="dynamic-favicon" rel="icon" type="image/png" href="logo.png?v=7">
-  <link rel="shortcut icon" type="image/png" href="logo.png?v=7">
-  <link rel="apple-touch-icon" href="logo.png?v=7">
+  <!-- FAVICON & CACHE BUSTER -->
+  <link id="dynamic-favicon" rel="icon" type="image/png" href="logo.png?v=8">
+  <link rel="shortcut icon" type="image/png" href="logo.png?v=8">
+  <link rel="apple-touch-icon" href="logo.png?v=8">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +16,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
-    /* PURE CSS PRELOADER (GUARANTEED TO RENDER INSTANTLY) */
     #preloader-overlay {
       position: fixed;
       inset: 0;
@@ -26,7 +25,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: opacity 0.6s ease-out;
+      transition: opacity 0.5s ease-out;
       font-family: 'Space Grotesk', sans-serif;
     }
 
@@ -56,27 +55,27 @@
       100% { height: 16px; }
     }
 
-    .glow-gold { box-shadow: 0 0 35px rgba(245, 158, 11, 0.4); }
+    .glow-gold { box-shadow: 0 0 35px rgba(245, 158, 11, 0.35); }
+    .glow-green { box-shadow: 0 0 35px rgba(16, 185, 129, 0.35); }
   </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-black overflow-x-hidden relative">
 
-  <!-- ================= BULLETPROOF CYBER PRELOADER ================= -->
+  <!-- ================= PRELOADER ================= -->
   <div id="preloader-overlay">
     <div class="relative w-28 h-28 mb-5">
       <div class="absolute -inset-2 rounded-full border-2 border-dashed border-amber-400/50 animate-spin" style="animation-duration: 6s;"></div>
       <div class="absolute -inset-4 rounded-full border border-emerald-500/20 animate-pulse"></div>
-      <img id="loader-avatar" src="logo.png" alt="Newton Swarm" class="relative z-10 w-full h-full object-contain rounded-full border-2 border-amber-400 glow-gold">
+      <img src="logo.png" alt="Newton Swarm" class="relative z-10 w-full h-full object-contain rounded-full border-2 border-amber-400 glow-gold">
     </div>
 
     <div class="font-serif-title text-amber-300 tracking-wider text-2xl font-extrabold text-center">NEWTON SWARM</div>
     
     <div class="mt-2 text-xs font-mono-code text-slate-400 flex items-center gap-2">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-      <span id="loader-log">Connecting to Robinhood Chain Node (4663)...</span>
+      <span id="loader-log">Loading 1720 Royal Mint & Swarm Infrastructure...</span>
     </div>
 
-    <!-- Progress Bar -->
     <div class="w-64 max-w-xs bg-slate-900 border border-slate-800 rounded-full h-2 mt-5 overflow-hidden p-0.5">
       <div id="loader-fill" class="bg-gradient-to-r from-emerald-500 via-amber-400 to-emerald-400 h-full rounded-full w-0 transition-all duration-75"></div>
     </div>
@@ -84,10 +83,10 @@
     <div class="mt-2 text-xs font-mono-code text-emerald-400 font-bold" id="loader-num">0%</div>
   </div>
 
-  <!-- Ambient Particle Field -->
+  <!-- Background Environment Engine -->
   <canvas id="bg-canvas"></canvas>
 
-  <!-- Background Music Element (Muted by Default) -->
+  <!-- Audio Element -->
   <audio id="bgm" src="bgm.mp3" loop preload="auto"></audio>
 
   <!-- ================= HEADER ================= -->
@@ -95,19 +94,26 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
       
       <!-- Brand Logo -->
-      <a href="#" class="flex items-center gap-3 group">
+      <a href="#/observatory" class="flex items-center gap-3 group">
         <div class="relative w-11 h-11 rounded-full overflow-hidden border-2 border-amber-400/90 shadow-md group-hover:scale-105 transition-transform bg-slate-900">
           <img id="nav-logo" src="logo.png" alt="SNEWT Logo" class="w-full h-full object-cover">
         </div>
         <div>
           <span class="font-serif-title font-bold text-base sm:text-lg tracking-wider text-amber-300 block leading-tight">NEWTON SWARM</span>
-          <span class="text-[11px] text-emerald-400 font-mono-code tracking-widest font-semibold">$SNEWT · ROBINHOOD</span>
+          <span class="text-[11px] text-emerald-400 font-mono-code tracking-widest font-semibold">$SNEWT · ROYAL MINT</span>
         </div>
       </a>
 
-      <!-- Controls -->
+      <!-- Quick Actions -->
       <div class="flex items-center gap-2 sm:gap-3">
-        <!-- Audio Button (Starts Muted) -->
+        <!-- Weather Atmosphere Selector -->
+        <div class="hidden md:flex items-center gap-1 p-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-mono-code">
+          <button onclick="setWeather('fog')" id="weather-fog-btn" class="px-2 py-1 rounded bg-slate-800 text-slate-200">🌫️ Fog</button>
+          <button onclick="setWeather('lanterns')" id="weather-lanterns-btn" class="px-2 py-1 rounded text-slate-400 hover:text-slate-200">🏮 Gold</button>
+          <button onclick="setWeather('midnight')" id="weather-midnight-btn" class="px-2 py-1 rounded text-slate-400 hover:text-slate-200">🌌 Midnight</button>
+        </div>
+
+        <!-- Audio Controller -->
         <button onclick="toggleAudio()" id="audio-btn" class="px-3 py-2 rounded-lg bg-slate-900 border border-slate-800 text-xs font-mono-code text-slate-300 hover:border-emerald-500/40 transition flex items-center gap-2">
           <div id="soundwave" class="hidden flex items-end gap-0.5 h-4">
             <span class="w-1 bg-emerald-400 rounded-full bar-anim"></span>
@@ -119,10 +125,10 @@
         </button>
 
         <a href="https://x.com/NewtonSwarm" target="_blank" class="text-xs uppercase font-mono-code tracking-wider font-semibold px-3 py-2 rounded-lg bg-slate-900 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition">
-          X / Twitter
+          X
         </a>
 
-        <!-- Official Launchpad Button -->
+        <!-- Launchpad Link -->
         <a href="https://www.si-md.xyz/launchpad/0xb42cf2ed6faf5340442af95b8b617e898e97d22f" target="_blank" class="text-xs uppercase font-mono-code tracking-wider font-bold px-3.5 sm:px-4 py-2 rounded-lg bg-amber-400 text-slate-950 hover:bg-amber-300 transition shadow-lg shadow-amber-400/20 flex items-center gap-1.5">
           <span>Official Launchpad ↗</span>
         </a>
@@ -132,26 +138,26 @@
 
   <!-- ================= HERO & CA ================= -->
   <main class="relative z-10 flex-1 flex flex-col justify-between">
-    <section class="max-w-4xl mx-auto px-4 pt-10 pb-6 text-center flex flex-col items-center">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/40 bg-emerald-950/40 text-emerald-300 text-xs font-mono-code font-semibold mb-5">
+    <section class="max-w-4xl mx-auto px-4 pt-8 pb-4 text-center flex flex-col items-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/40 bg-emerald-950/40 text-emerald-300 text-xs font-mono-code font-semibold mb-4">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        800 Autonomous Agents Guarding Mempool Liquidity
+        800 Autonomous AI Agents Defending Royal Mint Liquidity
       </div>
 
       <h1 class="font-serif-title text-4xl sm:text-6xl font-extrabold tracking-tight text-amber-300 leading-tight">
         DEFYING FINANCIAL GRAVITY
       </h1>
       
-      <p class="mt-3 text-sm sm:text-base text-slate-300 max-w-2xl font-light leading-relaxed">
-        Sir Isaac Newton returns to Robinhood Chain through the SuperIntelligent Swarm. Powered by Identity.md autonomous agents with 0% dev allocation, permanent liquidity lock, and continuous on-chain fee redistribution.
+      <p class="mt-2 text-sm sm:text-base text-slate-300 max-w-2xl font-light leading-relaxed">
+        Sir Isaac Newton's monetary principles revived on Robinhood Chain. An autonomous closed-loop DeFi ecosystem with 0% dev allocation, 0.50% community treasury governance, and anti-MEV hooks.
       </p>
 
       <!-- Verified CA Box -->
-      <div class="mt-6 w-full max-w-xl p-3.5 rounded-xl border border-emerald-800/60 bg-slate-900/90 shadow-2xl flex items-center justify-between gap-3">
+      <div class="mt-5 w-full max-w-xl p-3 rounded-xl border border-emerald-800/60 bg-slate-900/90 shadow-2xl flex items-center justify-between gap-3">
         <div class="text-left w-full overflow-hidden pl-1">
           <div class="text-[10px] tracking-widest text-slate-400 uppercase font-bold font-mono-code flex items-center gap-1.5">
-            <span>Verified Contract Address</span>
-            <span class="text-emerald-400">● LIVE ON SIMD</span>
+            <span>Verified Contract</span>
+            <span class="text-emerald-400">● LIVE ON ROBINHOOD</span>
           </div>
           <div class="text-xs sm:text-sm font-mono-code text-emerald-400 truncate mt-0.5 select-all font-semibold">
             0xb42cf2ed6faf5340442af95b8b617e898e97d22f
@@ -163,169 +169,245 @@
       </div>
     </section>
 
-    <!-- ================= ENTERPRISE TABS NAVIGATION ================= -->
-    <section class="max-w-6xl mx-auto px-4 py-4 w-full flex-1">
-      
-      <!-- Responsive Smooth Tab Bar -->
-      <div class="flex items-center gap-2 mb-6 border-b border-slate-800 pb-3 overflow-x-auto no-scrollbar">
-        <button onclick="switchTab('stats')" id="tab-stats-btn" class="tab-btn shrink-0 px-3.5 py-2 rounded-lg text-xs font-mono-code uppercase tracking-wider font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
-          📊 Telemetry
-        </button>
-        <button onclick="switchTab('swap')" id="tab-swap-btn" class="tab-btn shrink-0 px-3.5 py-2 rounded-lg text-xs font-mono-code uppercase tracking-wider font-bold text-slate-400 hover:text-slate-200">
-          ⚡ Calculator
-        </button>
-        <button onclick="switchTab('arcade')" id="tab-arcade-btn" class="tab-btn shrink-0 px-3.5 py-2 rounded-lg text-xs font-mono-code uppercase tracking-wider font-bold text-slate-400 hover:text-slate-200">
-          🍏 Arcade Lab
-        </button>
-        <button onclick="switchTab('litepaper')" id="tab-litepaper-btn" class="tab-btn shrink-0 px-3.5 py-2 rounded-lg text-xs font-mono-code uppercase tracking-wider font-bold text-slate-400 hover:text-slate-200">
-          📜 Principia Litepaper
-        </button>
-        <button onclick="switchTab('tokenomics')" id="tab-tokenomics-btn" class="tab-btn shrink-0 px-3.5 py-2 rounded-lg text-xs font-mono-code uppercase tracking-wider font-bold text-slate-400 hover:text-slate-200">
-          ⚖️ Mint Tokenomics
-        </button>
-        <button onclick="switchTab('swarm')" id="tab-swarm-btn" class="tab-btn shrink-0 px-3.5 py-2 rounded-lg text-xs font-mono-code uppercase tracking-wider font-bold text-slate-400 hover:text-slate-200">
-          🛰️ Node Explorer
-        </button>
-        <button onclick="switchTab('epochs')" id="tab-epochs-btn" class="tab-btn shrink-0 px-3.5 py-2 rounded-lg text-xs font-mono-code uppercase tracking-wider font-bold text-slate-400 hover:text-slate-200">
-          ⏳ Epochs (Roadmap)
-        </button>
-        <button onclick="switchTab('press')" id="tab-press-btn" class="tab-btn shrink-0 px-3.5 py-2 rounded-lg text-xs font-mono-code uppercase tracking-wider font-bold text-slate-400 hover:text-slate-200">
-          🎨 Media Kit
-        </button>
+    <!-- ================= HASH-ROUTED NAVIGATION ================= -->
+    <section class="max-w-6xl mx-auto px-4 py-2 w-full flex-1">
+      <div class="flex items-center gap-2 mb-6 border-b border-slate-800 pb-3 overflow-x-auto">
+        <a href="#/observatory" id="nav-btn-observatory" class="nav-route-btn px-3.5 py-2 rounded-lg text-xs font-mono-code uppercase tracking-wider font-bold text-slate-400 hover:text-slate-200">
+          🔭 1720 Observatory
+        </a>
+        <a href="#/vote" id="nav-btn-vote" class="nav-route-btn px-3.5 py-2 rounded-lg text-xs font-mono-code uppercase tracking-wider font-bold text-slate-400 hover:text-slate-200">
+          🗳️ Treasury Vote
+        </a>
+        <a href="#/terminal" id="nav-btn-terminal" class="nav-route-btn px-3.5 py-2 rounded-lg text-xs font-mono-code uppercase tracking-wider font-bold text-slate-400 hover:text-slate-200">
+          💻 Swarm Terminal
+        </a>
+        <a href="#/lab" id="nav-btn-lab" class="nav-route-btn px-3.5 py-2 rounded-lg text-xs font-mono-code uppercase tracking-wider font-bold text-slate-400 hover:text-slate-200">
+          🍏 Gravity Lab
+        </a>
+        <a href="#/arcade" id="nav-btn-arcade" class="nav-route-btn px-3.5 py-2 rounded-lg text-xs font-mono-code uppercase tracking-wider font-bold text-slate-400 hover:text-slate-200">
+          🎯 Anti-MEV Cannon
+        </a>
+        <a href="#/telemetry" id="nav-btn-telemetry" class="nav-route-btn px-3.5 py-2 rounded-lg text-xs font-mono-code uppercase tracking-wider font-bold text-slate-400 hover:text-slate-200">
+          📊 On-Chain Stats
+        </a>
+        <a href="#/docs" id="nav-btn-docs" class="nav-route-btn px-3.5 py-2 rounded-lg text-xs font-mono-code uppercase tracking-wider font-bold text-slate-400 hover:text-slate-200">
+          📜 Principia Docs
+        </a>
       </div>
 
-      <!-- ================= TAB 1: TELEMETRY (ACCURATE '—' PRE-TRADE) ================= -->
-      <div id="panel-stats" class="tab-panel space-y-5">
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-          <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/80 backdrop-blur-md">
-            <div class="text-[11px] uppercase font-mono-code text-slate-400 flex items-center justify-between">
-              <span>MARKET CAP</span>
-              <span id="mcap-pulse" class="w-2 h-2 rounded-full bg-slate-600"></span>
+      <!-- ================= ROUTE 1: 1720 OBSERVATORY ================= -->
+      <div id="view-observatory" class="view-panel hidden space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-5 rounded-2xl border border-amber-500/30 bg-slate-900/80 backdrop-blur-md md:col-span-2">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+              <h2 class="font-serif-title text-xl text-amber-300 font-bold">1720 Royal Observatory & Mint</h2>
+              <span class="text-xs font-mono-code text-emerald-400">London Meridian 0°</span>
             </div>
-            <div id="stat-mcap" class="text-2xl font-bold text-amber-300 mt-1">—</div>
-            <div id="stat-mcap-sub" class="text-[10px] text-slate-500 font-mono-code mt-0.5">Awaiting 1st trade</div>
-          </div>
-
-          <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/80 backdrop-blur-md">
-            <div class="text-[11px] uppercase font-mono-code text-slate-400 flex items-center justify-between">
-              <span>24H VOLUME</span>
-              <span class="text-xs text-slate-500">USD</span>
-            </div>
-            <div id="stat-vol" class="text-2xl font-bold text-emerald-400 mt-1">—</div>
-            <div id="stat-vol-sub" class="text-[10px] text-slate-500 font-mono-code mt-0.5">Awaiting 1st trade</div>
-          </div>
-
-          <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/80 backdrop-blur-md">
-            <div class="text-[11px] uppercase font-mono-code text-slate-400 flex items-center justify-between">
-              <span>CREATOR FEE</span>
-              <span class="text-xs text-amber-400 font-bold">0.5%</span>
-            </div>
-            <div class="text-lg sm:text-xl font-bold text-slate-100 mt-1">Forever Active</div>
-            <div class="text-[10px] text-emerald-400 font-mono-code mt-0.5">+ 0.5% to $SIMD Swarm</div>
-          </div>
-
-          <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/80 backdrop-blur-md">
-            <div class="text-[11px] uppercase font-mono-code text-slate-400">TOTAL SUPPLY</div>
-            <div class="text-lg sm:text-xl font-bold text-amber-400 mt-1">1,000,000,000</div>
-            <div class="text-[10px] text-amber-300 font-mono-code mt-0.5">0% Dev · Fair Launch</div>
-          </div>
-        </div>
-
-        <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/70 backdrop-blur-md">
-          <div class="flex items-center justify-between pb-3 border-b border-slate-800 text-xs font-mono-code">
-            <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-              <span class="text-slate-200 font-bold">$SNEWT Node Telemetry</span>
-            </div>
-            <span class="text-slate-400">Robinhood Chain (Chain ID: 4663)</span>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-4 font-mono-code text-xs">
-            <div class="p-3 rounded-lg bg-slate-950 border border-slate-800/80">
-              <span class="text-slate-500 block">Launchpad Protocol</span>
-              <span class="text-slate-200 font-bold text-sm mt-0.5 block">SIMD (Identity.md Swarm)</span>
-            </div>
-            <div class="p-3 rounded-lg bg-slate-950 border border-slate-800/80">
-              <span class="text-slate-500 block">Live Block Height</span>
-              <span id="stat-block" class="text-emerald-400 font-bold text-sm mt-0.5 block">#84,472,190</span>
-            </div>
-            <div class="p-3 rounded-lg bg-slate-950 border border-slate-800/80">
-              <span class="text-slate-500 block">Judge Verdict</span>
-              <span class="text-amber-300 font-bold text-sm mt-0.5 block">Verified & Deployed On-Chain</span>
+            <p class="text-xs text-slate-300 mt-3 leading-relaxed">
+              Welcome to the digital command center of Newton Swarm. As Master of the Royal Mint, Sir Isaac Newton instituted strict mathematical standards to crush counterfeiting. Here, 800 Identity.md AI agents apply those same laws to eliminate front-runners on Robinhood Chain.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4 text-xs font-mono-code">
+              <a href="#/vote" class="p-3 rounded-xl bg-slate-950 border border-slate-800 hover:border-amber-400/50 transition block">
+                <span class="text-amber-300 font-bold block">🏛️ The Mint Crucible</span>
+                <span class="text-slate-400 text-[11px]">Vote on 0.5% creator yield distribution</span>
+              </a>
+              <a href="#/lab" class="p-3 rounded-xl bg-slate-950 border border-slate-800 hover:border-emerald-400/50 transition block">
+                <span class="text-emerald-400 font-bold block">🍏 Gravity Lab</span>
+                <span class="text-slate-400 text-[11px]">Interactive bonding physics simulator</span>
+              </a>
+              <a href="#/terminal" class="p-3 rounded-xl bg-slate-950 border border-slate-800 hover:border-blue-400/50 transition block">
+                <span class="text-blue-400 font-bold block">🔭 Sentinel Radar</span>
+                <span class="text-slate-400 text-[11px]">Live mempool threat hunting stream</span>
+              </a>
             </div>
           </div>
 
-          <div class="pt-3 border-t border-slate-800 flex justify-between items-center text-[11px] font-mono-code text-slate-400">
-            <span>Market Cap & Volume automatically activate once trading begins on Launchpad.</span>
-            <button onclick="fetchLiveStats()" class="hover:text-emerald-400 transition flex items-center gap-1 text-slate-300">
-              <span>↻ Refresh Feeds</span>
+          <!-- Radio & Weather Card -->
+          <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/80 backdrop-blur-md flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+                <span class="font-serif-title text-sm text-slate-200 font-bold">Baroque Lo-Fi Radio</span>
+                <span class="text-[10px] font-mono-code text-emerald-400">LIVE FEED</span>
+              </div>
+              <p class="text-xs text-slate-400 mt-2">Ambient classical synth calibrated for deep mathematical modeling.</p>
+              <div class="mt-4 p-3 rounded-xl bg-slate-950 border border-slate-800 text-center">
+                <div class="text-xs font-mono-code text-amber-300 font-bold" id="radio-track">Track: Vivaldi in the Mempool (8-Bit)</div>
+                <div class="text-[11px] text-slate-500 font-mono-code mt-0.5">Stream: Web Audio Synthesis</div>
+              </div>
+            </div>
+            <button onclick="toggleAudio()" class="mt-4 w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-mono-code text-slate-200 border border-slate-700 transition">
+              Play / Mute Audio Stream
             </button>
           </div>
         </div>
       </div>
 
-      <!-- ================= TAB 2: TRADE CALCULATOR ================= -->
-      <div id="panel-swap" class="tab-panel hidden max-w-lg mx-auto">
-        <div class="p-6 rounded-2xl border border-emerald-900/60 bg-slate-900/90 backdrop-blur-md shadow-2xl">
-          <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+      <!-- ================= ROUTE 2: TREASURY VOTE ================= -->
+      <div id="view-vote" class="view-panel hidden max-w-4xl mx-auto space-y-6">
+        <div class="p-6 rounded-2xl border border-amber-500/30 bg-slate-900/90 backdrop-blur-md">
+          <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-800">
             <div>
-              <h3 class="font-serif-title font-bold text-amber-300 text-base">Trade & Bonding Calculator</h3>
-              <p class="text-[11px] text-slate-400">Calculate output for Robinhood Uniswap v4 swaps</p>
+              <div class="text-xs font-mono-code text-emerald-400 font-bold">EPOCH I GOVERNANCE</div>
+              <h2 class="font-serif-title text-2xl font-bold text-amber-300">The Royal Treasury Crucible</h2>
             </div>
-            <span class="text-[11px] font-mono-code px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">SIMD Fee: 0.50%</span>
-          </div>
-
-          <div class="mt-4 space-y-3">
-            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-              <div class="flex justify-between text-xs text-slate-400 mb-1 font-mono-code">
-                <span>You pay</span>
-                <span>Asset: <strong>$IMD</strong></span>
-              </div>
-              <div class="flex items-center justify-between">
-                <input type="number" id="calc-input" placeholder="0.0" value="10" oninput="runCalculator()" class="bg-transparent text-xl font-bold text-white focus:outline-none w-1/2 font-mono-code">
-                <div class="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-800 text-xs font-bold font-mono-code text-amber-300 border border-slate-700">
-                  <span>IMD</span>
-                </div>
-              </div>
-
-              <div class="grid grid-cols-4 gap-2 mt-2 pt-2 border-t border-slate-900">
-                <button onclick="setCalcAmount(1)" class="py-1 text-[11px] font-mono-code rounded bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800">1 IMD</button>
-                <button onclick="setCalcAmount(5)" class="py-1 text-[11px] font-mono-code rounded bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800">5 IMD</button>
-                <button onclick="setCalcAmount(10)" class="py-1 text-[11px] font-mono-code rounded bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800">10 IMD</button>
-                <button onclick="setCalcAmount(50)" class="py-1 text-[11px] font-mono-code rounded bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800">50 IMD</button>
-              </div>
-            </div>
-
-            <div class="text-center text-slate-500 text-xs">↓</div>
-
-            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-              <div class="flex justify-between text-xs text-slate-400 mb-1 font-mono-code">
-                <span>You receive (estimated)</span>
-                <span>Token</span>
-              </div>
-              <div class="flex items-center justify-between">
-                <input type="text" id="calc-output" value="~ 4,000,000" readonly class="bg-transparent text-xl font-bold text-emerald-400 focus:outline-none w-1/2 font-mono-code">
-                <div class="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-800 text-xs font-bold font-mono-code text-emerald-300 border border-slate-700">
-                  <span>$SNEWT</span>
-                </div>
-              </div>
+            <div class="p-2.5 rounded-xl bg-slate-950 border border-amber-500/40 text-right font-mono-code">
+              <span class="text-[10px] text-slate-400 block">Accrued Creator Fee (0.50%)</span>
+              <span class="text-sm font-bold text-amber-300" id="crucible-balance">100% Routed to Community</span>
             </div>
           </div>
 
-          <a href="https://www.si-md.xyz/launchpad/0xb42cf2ed6faf5340442af95b8b617e898e97d22f" target="_blank" class="mt-6 block text-center w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-amber-400 text-slate-950 font-bold font-mono-code uppercase tracking-wider text-xs hover:brightness-110 transition shadow-lg shadow-emerald-500/20">
-            Buy on Official Launchpad ↗
-          </a>
-          <p class="text-[11px] text-center text-slate-500 mt-2 font-mono-code">Swaps run on Uniswap v4 on Robinhood Chain from your connected wallet.</p>
+          <p class="text-xs text-slate-300 mt-4 leading-relaxed">
+            In standard memecoins, the 0.50% creator fee lines the developer's pockets. In Newton Swarm, **the token holders decide how the protocol fee is deployed.** Cast your vote on the current Epoch proposal below:
+          </p>
+
+          <!-- Proposals Grid -->
+          <div class="space-y-4 mt-6">
+            <!-- Proposal 1 -->
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 hover:border-emerald-500/40 transition">
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-xs font-mono-code text-emerald-400 font-bold">PROPOSAL A</span>
+                  <h3 class="font-serif-title text-base text-slate-100 font-bold">The Royal Buyback & Smelt (Burn)</h3>
+                  <p class="text-xs text-slate-400 mt-0.5">Use 100% of accumulated fees to market-buy $SNEWT and permanently burn tokens.</p>
+                </div>
+                <button onclick="castVote('burn')" class="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-mono-code font-bold uppercase transition">
+                  Vote
+                </button>
+              </div>
+              <div class="w-full bg-slate-900 rounded-full h-2 mt-3 overflow-hidden">
+                <div id="bar-burn" class="bg-emerald-400 h-full rounded-full transition-all duration-300" style="width: 52%"></div>
+              </div>
+              <div class="flex justify-between text-[11px] font-mono-code text-slate-500 mt-1">
+                <span>Votes: <strong id="count-burn" class="text-slate-300">52%</strong></span>
+                <span>Impact: Deflationary Supply Shock</span>
+              </div>
+            </div>
+
+            <!-- Proposal 2 -->
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 hover:border-amber-500/40 transition">
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-xs font-mono-code text-amber-400 font-bold">PROPOSAL B</span>
+                  <h3 class="font-serif-title text-base text-slate-100 font-bold">DexScreener Royal Seal Fund</h3>
+                  <p class="text-xs text-slate-400 mt-0.5">Pool creator fees until the official DexScreener paid badge is self-funded without out-of-pocket costs.</p>
+                </div>
+                <button onclick="castVote('dex')" class="px-4 py-2 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-mono-code font-bold uppercase transition">
+                  Vote
+                </button>
+              </div>
+              <div class="w-full bg-slate-900 rounded-full h-2 mt-3 overflow-hidden">
+                <div id="bar-dex" class="bg-amber-400 h-full rounded-full transition-all duration-300" style="width: 33%"></div>
+              </div>
+              <div class="flex justify-between text-[11px] font-mono-code text-slate-500 mt-1">
+                <span>Votes: <strong id="count-dex" class="text-slate-300">33%</strong></span>
+                <span>Impact: Global Discoverability</span>
+              </div>
+            </div>
+
+            <!-- Proposal 3 -->
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 hover:border-blue-500/40 transition">
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-xs font-mono-code text-blue-400 font-bold">PROPOSAL C</span>
+                  <h3 class="font-serif-title text-base text-slate-100 font-bold">Master of the Mint Arcade Bounty</h3>
+                  <p class="text-xs text-slate-400 mt-0.5">Reward the top 3 weekly defenders in Newton's Anti-MEV Cannon arcade game.</p>
+                </div>
+                <button onclick="castVote('arcade')" class="px-4 py-2 rounded-lg bg-blue-400 hover:bg-blue-300 text-slate-950 text-xs font-mono-code font-bold uppercase transition">
+                  Vote
+                </button>
+              </div>
+              <div class="w-full bg-slate-900 rounded-full h-2 mt-3 overflow-hidden">
+                <div id="bar-arcade" class="bg-blue-400 h-full rounded-full transition-all duration-300" style="width: 15%"></div>
+              </div>
+              <div class="flex justify-between text-[11px] font-mono-code text-slate-500 mt-1">
+                <span>Votes: <strong id="count-arcade" class="text-slate-300">15%</strong></span>
+                <span>Impact: Community Gaming Hype</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="vote-feedback" class="mt-4 text-center text-xs font-mono-code text-emerald-400 min-h-[16px]"></div>
         </div>
       </div>
 
-      <!-- ================= TAB 3: ARCADE LAB (NEWTON PEPE DEFENDER) ================= -->
-      <div id="panel-arcade" class="tab-panel hidden max-w-2xl mx-auto">
+      <!-- ================= ROUTE 3: SWARM TERMINAL ================= -->
+      <div id="view-terminal" class="view-panel hidden max-w-4xl mx-auto space-y-4">
+        <div class="rounded-2xl border border-slate-800 bg-slate-950 p-5 font-mono-code shadow-2xl">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-900 text-xs text-slate-400">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
+              <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+              <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
+              <span class="text-slate-300 ml-2 font-bold">NEWTON SWARM SENTINEL RADAR v1.0.4</span>
+            </div>
+            <span class="text-emerald-400">800/800 NODES ONLINE</span>
+          </div>
+
+          <!-- Console Output Screen -->
+          <div id="terminal-screen" class="mt-4 h-64 overflow-y-auto space-y-1.5 text-xs text-slate-300 pr-2">
+            <div class="text-slate-500">Initializing Royal Mint Mempool Defense Subsystem...</div>
+            <div class="text-emerald-400">[OK] 800 Identity.md autonomous agents synchronized.</div>
+            <div class="text-amber-400">[INFO] Counterfeit scanning mode: ACTIVE on Robinhood Chain (ID: 4663).</div>
+            <div class="text-slate-400">Type <span class="text-amber-300 font-bold">'help'</span> to see available commands or monitor the live stream below.</div>
+            <div class="border-b border-slate-900 my-2"></div>
+          </div>
+
+          <!-- Interactive Command Prompt -->
+          <form onsubmit="handleTerminalCmd(event)" class="mt-3 pt-3 border-t border-slate-900 flex items-center gap-2">
+            <span class="text-emerald-400 font-bold text-xs">newton@mint-core:~$</span>
+            <input type="text" id="terminal-input" placeholder="Type help, scan, vote, stats, clear..." autocomplete="off" class="bg-transparent text-xs text-white focus:outline-none w-full font-mono-code">
+          </form>
+        </div>
+      </div>
+
+      <!-- ================= ROUTE 4: GRAVITY LAB ================= -->
+      <div id="view-lab" class="view-panel hidden max-w-4xl mx-auto space-y-4">
+        <div class="p-6 rounded-2xl border border-emerald-500/30 bg-slate-900/90 backdrop-blur-md">
+          <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-800">
+            <div>
+              <h2 class="font-serif-title text-xl text-amber-300 font-bold">Newton's Gravity Mechanics Lab</h2>
+              <p class="text-xs text-slate-400 font-mono-code">Interactive Uniswap v4 Bonding Invariant Simulator</p>
+            </div>
+            <span class="text-xs font-mono-code px-3 py-1 rounded-lg bg-slate-950 border border-slate-800 text-emerald-400">
+              Law: F = G * (m1*m2) / r²
+            </span>
+          </div>
+
+          <!-- Simulator Canvas -->
+          <div class="relative mt-4 rounded-xl overflow-hidden border border-slate-800 bg-slate-950">
+            <canvas id="lab-canvas" width="700" height="320" class="w-full h-[280px] sm:h-[320px] block"></canvas>
+            <div class="absolute bottom-3 left-3 bg-slate-950/80 px-3 py-1.5 rounded-lg border border-slate-800 text-[11px] font-mono-code text-slate-300">
+              Center Mass: <strong class="text-amber-300">$SNEWT Pool</strong> · Orbiters: <strong class="text-emerald-400">IMD Liquidity</strong>
+            </div>
+          </div>
+
+          <!-- Simulator Controls -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 font-mono-code text-xs">
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="flex justify-between text-slate-400 mb-1">
+                <span>Injected Liquidity (Mass M)</span>
+                <span id="lab-mass-val" class="text-emerald-400 font-bold">10 IMD</span>
+              </div>
+              <input type="range" min="1" max="50" value="10" id="lab-mass-slider" oninput="updateLabMass()" class="w-full accent-emerald-500">
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="flex justify-between text-slate-400 mb-1">
+                <span>Gravitational Resistance (Hook Penalty)</span>
+                <span id="lab-grav-val" class="text-amber-400 font-bold">40% Early Hook</span>
+              </div>
+              <input type="range" min="2" max="40" value="40" id="lab-grav-slider" oninput="updateLabGrav()" class="w-full accent-amber-400">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= ROUTE 5: ARCADE LAB ================= -->
+      <div id="view-arcade" class="view-panel hidden max-w-2xl mx-auto space-y-4">
         <div class="p-5 rounded-2xl border border-amber-500/30 bg-slate-900/90 backdrop-blur-md">
           <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-800">
             <div>
               <h3 class="font-serif-title text-amber-300 text-base font-bold">Newton's Anti-MEV Cannon</h3>
-              <p class="text-xs text-slate-400">Aim with Newton Pepe and click to launch gravity apples at sandwich snipers!</p>
+              <p class="text-xs text-slate-400">Aim with Newton Pepe and blast MEV snipers!</p>
             </div>
             <div class="flex items-center gap-3 font-mono-code text-xs">
               <span class="text-slate-400">Score: <strong id="game-score" class="text-amber-300 text-sm">0</strong></span>
@@ -342,7 +424,7 @@
                 <img src="logo.png" alt="Newton Defender" class="w-full h-full object-cover">
               </div>
               <h4 id="overlay-title" class="font-serif-title text-xl text-amber-300 font-bold">Mempool Defense Ready</h4>
-              <p id="overlay-sub" class="text-xs text-slate-300 mt-1 max-w-xs text-center font-mono-code">Defend the Uniswap v4 bonding pool from toxic MEV bots!</p>
+              <p id="overlay-sub" class="text-xs text-slate-300 mt-1 max-w-xs text-center font-mono-code">Defend the Uniswap v4 bonding pool from toxic bots!</p>
               <button onclick="startGame()" class="mt-4 px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold font-mono-code text-xs uppercase tracking-wider transition shadow-lg shadow-emerald-500/30">
                 Start Defense
               </button>
@@ -350,286 +432,105 @@
           </div>
 
           <div class="mt-3 flex items-center justify-between text-[11px] font-mono-code text-slate-400">
-            <span>Controls: Aim with mouse & Click to Shoot Apples</span>
+            <span>Controls: Aim with mouse & Click to Shoot</span>
             <span class="text-emerald-400">Defender: Sir Isaac Newton Pepe</span>
           </div>
         </div>
       </div>
 
-      <!-- ================= TAB 4: PRINCIPIA LITEPAPER (ENTERPRISE DOCS) ================= -->
-      <div id="panel-litepaper" class="tab-panel hidden max-w-4xl mx-auto space-y-6">
+      <!-- ================= ROUTE 6: ON-CHAIN TELEMETRY ================= -->
+      <div id="view-telemetry" class="view-panel hidden max-w-4xl mx-auto space-y-5">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/80 backdrop-blur-md">
+            <div class="text-[11px] uppercase font-mono-code text-slate-400 flex items-center justify-between">
+              <span>MARKET CAP</span>
+              <span id="mcap-pulse" class="w-2 h-2 rounded-full bg-slate-600"></span>
+            </div>
+            <div id="stat-mcap" class="text-2xl font-bold text-amber-300 mt-1">—</div>
+            <div class="text-[10px] text-slate-500 font-mono-code mt-0.5">Awaiting 1st trade</div>
+          </div>
+
+          <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/80 backdrop-blur-md">
+            <div class="text-[11px] uppercase font-mono-code text-slate-400 flex items-center justify-between">
+              <span>24H VOLUME</span>
+              <span class="text-xs text-slate-500">USD</span>
+            </div>
+            <div id="stat-vol" class="text-2xl font-bold text-emerald-400 mt-1">—</div>
+            <div class="text-[10px] text-slate-500 font-mono-code mt-0.5">Awaiting 1st trade</div>
+          </div>
+
+          <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/80 backdrop-blur-md">
+            <div class="text-[11px] uppercase font-mono-code text-slate-400 flex items-center justify-between">
+              <span>CREATOR FEE</span>
+              <span class="text-xs text-amber-400 font-bold">0.5%</span>
+            </div>
+            <div class="text-lg sm:text-xl font-bold text-slate-100 mt-1">100% Governed</div>
+            <div class="text-[10px] text-emerald-400 font-mono-code mt-0.5">Voted in Crucible</div>
+          </div>
+
+          <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/80 backdrop-blur-md">
+            <div class="text-[11px] uppercase font-mono-code text-slate-400">TOTAL SUPPLY</div>
+            <div class="text-lg sm:text-xl font-bold text-amber-400 mt-1">1,000,000,000</div>
+            <div class="text-[10px] text-amber-300 font-mono-code mt-0.5">0% Dev · Fair Launch</div>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/70 backdrop-blur-md font-mono-code text-xs">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <span class="text-slate-200 font-bold">$SNEWT Node Telemetry</span>
+            <span class="text-emerald-400">Robinhood Chain (ID: 4663)</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-4">
+            <div class="p-3 rounded-lg bg-slate-950 border border-slate-800">
+              <span class="text-slate-500 block">Launchpad Protocol</span>
+              <span class="text-slate-200 font-bold text-sm mt-0.5 block">SIMD (Identity.md)</span>
+            </div>
+            <div class="p-3 rounded-lg bg-slate-950 border border-slate-800">
+              <span class="text-slate-500 block">Current Block</span>
+              <span id="stat-block" class="text-emerald-400 font-bold text-sm mt-0.5 block">#84,472,190</span>
+            </div>
+            <div class="p-3 rounded-lg bg-slate-950 border border-slate-800">
+              <span class="text-slate-500 block">Hook Architecture</span>
+              <span class="text-amber-300 font-bold text-sm mt-0.5 block">Uniswap v4 Anti-Sniper</span>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex justify-between items-center text-[11px] text-slate-400">
+            <span>Dynamic telemetry updates in real-time.</span>
+            <button onclick="fetchLiveStats()" class="hover:text-emerald-400 text-slate-300">↻ Sync Feeds</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= ROUTE 7: PRINCIPIA DOCS ================= -->
+      <div id="view-docs" class="view-panel hidden max-w-4xl mx-auto space-y-6">
         <div class="p-6 rounded-2xl border border-slate-800 bg-slate-900/80 backdrop-blur-md">
           <div class="flex items-center justify-between pb-4 border-b border-slate-800">
             <div>
-              <span class="text-xs font-mono-code text-emerald-400 tracking-wider font-bold">SPECIFICATION v1.0</span>
+              <span class="text-xs font-mono-code text-emerald-400 font-bold">SPECIFICATION v1.0</span>
               <h2 class="font-serif-title text-2xl font-bold text-amber-300">Principia Swarmica</h2>
             </div>
             <a href="https://robinhoodchain.blockscout.com/address/0xb42cf2ed6faf5340442af95b8b617e898e97d22f" target="_blank" class="text-xs font-mono-code px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700">
-              Verify On Blockscout ↗
+              Blockscout Audit ↗
             </a>
           </div>
 
-          <div class="mt-6 space-y-5 text-sm text-slate-300 leading-relaxed font-light">
-            <div>
-              <h3 class="text-base font-bold text-slate-100 font-serif-title mb-1">1. Abstract & The 1720 Problem</h3>
-              <p>
-                In 1720, Sir Isaac Newton endured a catastrophic capital drawdown during the South Sea bubble, concluding: <em>"I can calculate the motion of heavenly bodies, but not the madness of people."</em> Over 300 years later, modern decentralized finance mirrors this volatility through predatory MEV (Maximal Extractable Value), front-running bots, and extractive sandwich snipers. Newton Swarm ($SNEWT) synthesizes historical monetary theory with decentralized autonomous agent swarms to enforce mathematical order across on-chain order flow.
-              </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-              <div class="p-4 rounded-xl bg-slate-950 border border-slate-800/80">
-                <span class="text-amber-400 font-bold font-mono-code text-xs block mb-1">300 Mempool Sentinels</span>
-                <p class="text-xs text-slate-400">Autonomous agents monitoring block composition on Robinhood Chain, flagging toxic gas manipulation and multi-transaction sandwich patterns.</p>
+          <div class="mt-6 space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
+            <p>
+              In 1720, Sir Isaac Newton survived the South Sea collapse and established uncompromising bullion integrity at the Royal Mint. Newton Swarm translates these immutable economic rules into autonomous code on Robinhood Chain.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 my-4 font-mono-code text-xs">
+              <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                <span class="text-amber-400 font-bold block mb-1">90% Liquidity Locked</span>
+                <p class="text-slate-400 text-[11px]">Bound permanently inside the Uniswap v4 pool. Zero dev withdrawal keys.</p>
               </div>
-              <div class="p-4 rounded-xl bg-slate-950 border border-slate-800/80">
-                <span class="text-emerald-400 font-bold font-mono-code text-xs block mb-1">300 Liquidity Wardens</span>
-                <p class="text-xs text-slate-400">Verifying bonding curve depth and ensuring mathematical integrity across Uniswap v4 pooled liquidity with zero manual intervention.</p>
+              <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                <span class="text-emerald-400 font-bold block mb-1">0.50% Community Fee</span>
+                <p class="text-slate-400 text-[11px]">100% of creator royalties are routed directly into the community voting crucible.</p>
               </div>
-              <div class="p-4 rounded-xl bg-slate-950 border border-slate-800/80">
-                <span class="text-slate-200 font-bold font-mono-code text-xs block mb-1">200 Telemetry Relays</span>
-                <p class="text-xs text-slate-400">Broadcasting node telemetry, coordinating consensus rounds across Identity.md, and executing protocol royalty distributions.</p>
+              <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                <span class="text-slate-200 font-bold block mb-1">4 Independent Audits</span>
+                <p class="text-slate-400 text-[11px]">Verified by Identity.md AI consensus with zero exploit vulnerabilities.</p>
               </div>
-            </div>
-
-            <div class="pt-2">
-              <h3 class="text-base font-bold text-slate-100 font-serif-title mb-1">2. Uniswap v4 Anti-Sniper Hooks</h3>
-              <p>
-                Integrated with Uniswap v4 hooks, $SNEWT penalizes predatory multi-block extraction through dynamic hook penalties that automatically decay from 40% down to the baseline 2% over initial blocks. 100% of penalty surplus is immediately channeled back into the liquidity reserve, turning predator capital into permanent floor support.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ================= TAB 5: ROYAL TOKENOMICS & FEE ROUTING ================= -->
-      <div id="panel-tokenomics" class="tab-panel hidden max-w-4xl mx-auto space-y-6">
-        <div class="p-6 rounded-2xl border border-slate-800 bg-slate-900/80 backdrop-blur-md">
-          <h2 class="font-serif-title text-2xl font-bold text-amber-300 mb-1">Royal Mint Economics</h2>
-          <p class="text-xs text-slate-400 font-mono-code mb-6">Deterministic Supply & Verified Fee Architecture</p>
-
-          <!-- Allocation Grid -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-            <div class="p-4 rounded-xl bg-slate-950 border border-emerald-500/30">
-              <span class="text-xs font-mono-code text-slate-500 block">Bonding & LP Pool</span>
-              <span class="text-2xl font-bold text-emerald-400 mt-1 block">90.00%</span>
-              <p class="text-[11px] text-slate-400 mt-1">Permanently locked inside the Uniswap v4 bonding contract. Zero withdrawal keys.</p>
-            </div>
-            <div class="p-4 rounded-xl bg-slate-950 border border-amber-500/30">
-              <span class="text-xs font-mono-code text-slate-500 block">Initial Swarm Allocation</span>
-              <span class="text-2xl font-bold text-amber-300 mt-1 block">10.00%</span>
-              <p class="text-[11px] text-slate-400 mt-1">Allocated to SIMD decentralized bootstrap reserve for initial bonding progression.</p>
-            </div>
-            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
-              <span class="text-xs font-mono-code text-slate-500 block">Dev & Team Bag</span>
-              <span class="text-2xl font-bold text-slate-200 mt-1 block">0.00%</span>
-              <p class="text-[11px] text-emerald-400 mt-1 font-semibold">Zero dev tokens. 100% fair launch mechanics without pre-mine.</p>
-            </div>
-          </div>
-
-          <!-- Fee Flow Routing Diagram -->
-          <div class="p-5 rounded-xl bg-slate-950 border border-slate-800">
-            <span class="text-xs font-mono-code text-amber-300 uppercase tracking-wider font-bold block mb-4">
-              1.00% Perpetual Protocol Fee Flow
-            </span>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div class="p-4 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-3">
-                <span class="text-2xl">👑</span>
-                <div>
-                  <div class="text-sm font-bold text-slate-100 font-mono-code">0.50% ➔ Creator Royalty</div>
-                  <p class="text-xs text-slate-400 mt-1">Credited continuously to the verified deployer wallet on Robinhood Chain, funding long-term ecosystem development and custom infrastructure.</p>
-                </div>
-              </div>
-              <div class="p-4 rounded-lg bg-slate-900 border border-slate-800 flex items-start gap-3">
-                <span class="text-2xl">🌐</span>
-                <div>
-                  <div class="text-sm font-bold text-slate-100 font-mono-code">0.50% ➔ $SIMD Swarm Ecosystem</div>
-                  <p class="text-xs text-slate-400 mt-1">Routed to SuperIntelligent Identity governance pools, incentivizing autonomous agent consensus and cross-swarm liquidity security.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Security Badges -->
-          <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-xs font-mono-code">
-            <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-800 text-emerald-400">✓ Immutable Contract</div>
-            <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-800 text-emerald-400">✓ No Mint Function</div>
-            <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-800 text-emerald-400">✓ No Blacklist Code</div>
-            <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-800 text-emerald-400">✓ 100% On-Chain Proof</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ================= TAB 6: SWARM NODE EXPLORER ================= -->
-      <div id="panel-swarm" class="tab-panel hidden max-w-4xl mx-auto space-y-6">
-        <div class="p-6 rounded-2xl border border-slate-800 bg-slate-900/80 backdrop-blur-md">
-          <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-800">
-            <div>
-              <h2 class="font-serif-title text-2xl font-bold text-amber-300">Swarm Node Explorer</h2>
-              <p class="text-xs text-slate-400 font-mono-code">800 Identity.md Autonomous Telemetry Nodes</p>
-            </div>
-            <div class="flex items-center gap-2 text-xs font-mono-code">
-              <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-              <span class="text-emerald-400 font-bold">Consensus: 800/800 Active</span>
-            </div>
-          </div>
-
-          <!-- 4 Audits Passed Cards -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 my-6">
-            <div class="p-3.5 rounded-xl bg-slate-950 border border-emerald-500/30 text-center">
-              <span class="text-[10px] text-slate-500 font-mono-code block">AUDIT 1</span>
-              <span class="text-xs font-bold text-emerald-400 mt-1 block">Static Analysis</span>
-              <span class="text-[10px] text-slate-400 font-mono-code">PASSED (100%)</span>
-            </div>
-            <div class="p-3.5 rounded-xl bg-slate-950 border border-emerald-500/30 text-center">
-              <span class="text-[10px] text-slate-500 font-mono-code block">AUDIT 2</span>
-              <span class="text-xs font-bold text-emerald-400 mt-1 block">Anti-Drain Hook</span>
-              <span class="text-[10px] text-slate-400 font-mono-code">VERIFIED</span>
-            </div>
-            <div class="p-3.5 rounded-xl bg-slate-950 border border-emerald-500/30 text-center">
-              <span class="text-[10px] text-slate-500 font-mono-code block">AUDIT 3</span>
-              <span class="text-xs font-bold text-emerald-400 mt-1 block">Invariant Proof</span>
-              <span class="text-[10px] text-slate-400 font-mono-code">MATHEMATICAL</span>
-            </div>
-            <div class="p-3.5 rounded-xl bg-slate-950 border border-emerald-500/30 text-center">
-              <span class="text-[10px] text-slate-500 font-mono-code block">AUDIT 4</span>
-              <span class="text-xs font-bold text-emerald-400 mt-1 block">SIMD Swarm</span>
-              <span class="text-[10px] text-slate-400 font-mono-code">CONSENSUS SIGNED</span>
-            </div>
-          </div>
-
-          <!-- Live Agent Console Terminal -->
-          <div class="rounded-xl bg-slate-950 border border-slate-800 p-4 font-mono-code text-xs overflow-hidden">
-            <div class="flex items-center justify-between text-[11px] text-slate-500 pb-2 border-b border-slate-900 mb-3">
-              <span>AGENT CONSOLE LOGS · ROBINHOOD MAINNET</span>
-              <span class="text-emerald-400">LIVE FEED</span>
-            </div>
-            <div id="agent-console-feed" class="space-y-1.5 text-[11px] text-slate-300 h-44 overflow-y-auto">
-              <div><span class="text-slate-500">[01:13:02]</span> <span class="text-amber-400">Agent #0012 [Sentinel]:</span> Mempool scan complete. No toxic front-runners detected.</div>
-              <div><span class="text-slate-500">[01:13:06]</span> <span class="text-emerald-400">Agent #0341 [Warden]:</span> Uniswap v4 bonding invariant confirmed (k = x * y).</div>
-              <div><span class="text-slate-500">[01:13:10]</span> <span class="text-blue-400">Agent #0719 [Relay]:</span> Robinhood Chain RPC block #84,472,192 verified.</div>
-              <div><span class="text-slate-500">[01:13:15]</span> <span class="text-amber-400">Agent #0098 [Sentinel]:</span> Zero fee leakage. Swarm consensus: 100% healthy.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ================= TAB 7: GRAVITATIONAL EPOCHS (ROADMAP) ================= -->
-      <div id="panel-epochs" class="tab-panel hidden max-w-4xl mx-auto space-y-6">
-        <div class="p-6 rounded-2xl border border-slate-800 bg-slate-900/80 backdrop-blur-md">
-          <h2 class="font-serif-title text-2xl font-bold text-amber-300 mb-1">Gravitational Epochs</h2>
-          <p class="text-xs text-slate-400 font-mono-code mb-8">Strategic Milestones & Swarm Roadmap</p>
-
-          <div class="space-y-6 relative border-l-2 border-slate-800 ml-4 pl-6">
-            
-            <!-- Epoch 1 -->
-            <div class="relative">
-              <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-emerald-500 border-4 border-slate-950"></div>
-              <div class="flex items-center gap-2">
-                <span class="text-xs font-mono-code font-bold text-emerald-400 px-2 py-0.5 rounded bg-emerald-500/20">EPOCH I · COMPLETED</span>
-                <span class="text-xs font-mono-code text-slate-400">Genesis of the Mint</span>
-              </div>
-              <h3 class="text-base font-bold text-slate-100 font-serif-title mt-1.5">Smart Contract Deployment & Launchpad Genesis</h3>
-              <p class="text-xs text-slate-400 mt-1 leading-relaxed">
-                Verification of contract <code class="text-emerald-400">0xb42c...d22f</code>, integration with the SIMD Launchpad, deployment of Newton's Anti-MEV Cannon arcade defense, and establishment of initial community telemetry.
-              </p>
-            </div>
-
-            <!-- Epoch 2 -->
-            <div class="relative">
-              <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-amber-400 border-4 border-slate-950 animate-pulse"></div>
-              <div class="flex items-center gap-2">
-                <span class="text-xs font-mono-code font-bold text-amber-300 px-2 py-0.5 rounded bg-amber-400/20">EPOCH II · IN PROGRESS</span>
-                <span class="text-xs font-mono-code text-slate-400">Swarm Velocity</span>
-              </div>
-              <h3 class="text-base font-bold text-slate-100 font-serif-title mt-1.5">DexScreener Indexing & Community Expansion</h3>
-              <p class="text-xs text-slate-400 mt-1 leading-relaxed">
-                Verification of official token metadata across DexScreener, custom domain migration, implementation of competitive community leaderboards for the arcade lab, and strategic Robinhood Chain AI swarm alliances.
-              </p>
-            </div>
-
-            <!-- Epoch 3 -->
-            <div class="relative">
-              <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-slate-700 border-4 border-slate-950"></div>
-              <div class="flex items-center gap-2">
-                <span class="text-xs font-mono-code font-bold text-slate-400 px-2 py-0.5 rounded bg-slate-800">EPOCH III · UPCOMING</span>
-                <span class="text-xs font-mono-code text-slate-400">Universal Gravitation</span>
-              </div>
-              <h3 class="text-base font-bold text-slate-100 font-serif-title mt-1.5">Institutional Hooks & Autonomous Signals</h3>
-              <p class="text-xs text-slate-400 mt-1 leading-relaxed">
-                Expansion into advanced Robinhood Chain AMM liquidity pairs, automated buyback incentives fueled by creator protocol fee distributions, and decentralized autonomous telemetry voting.
-              </p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <!-- ================= TAB 8: BRAND & PRESS KIT ================= -->
-      <div id="panel-press" class="tab-panel hidden max-w-4xl mx-auto space-y-6">
-        <div class="p-6 rounded-2xl border border-slate-800 bg-slate-900/80 backdrop-blur-md">
-          <h2 class="font-serif-title text-2xl font-bold text-amber-300 mb-1">Official Brand & Press Kit</h2>
-          <p class="text-xs text-slate-400 font-mono-code mb-6">Visual Guidelines & Listing Verification Metadata</p>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            <!-- Asset Download Card -->
-            <div class="p-5 rounded-xl bg-slate-950 border border-slate-800 flex flex-col justify-between">
-              <div>
-                <span class="text-xs font-mono-code text-amber-300 uppercase font-bold block mb-3">Official Logo Asset</span>
-                <div class="flex items-center gap-4">
-                  <div class="w-20 h-20 rounded-full border-2 border-amber-400 overflow-hidden shadow-lg bg-slate-900">
-                    <img src="logo.png" alt="Newton Swarm Logo" class="w-full h-full object-cover">
-                  </div>
-                  <div>
-                    <h4 class="font-serif-title text-base font-bold text-slate-100">Sir Isaac Newton Pepe</h4>
-                    <p class="text-xs text-slate-400 mt-0.5">Master of the Royal Mint (2D Flat Matte Edition)</p>
-                  </div>
-                </div>
-              </div>
-              <a href="logo.png" download="newton-swarm-logo.png" class="mt-5 text-center w-full py-2.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold font-mono-code text-xs uppercase tracking-wider transition">
-                Download High-Res Logo (PNG)
-              </a>
-            </div>
-
-            <!-- Hex Color Palette -->
-            <div class="p-5 rounded-xl bg-slate-950 border border-slate-800">
-              <span class="text-xs font-mono-code text-amber-300 uppercase font-bold block mb-3">Brand Color System</span>
-              <div class="space-y-2.5 font-mono-code text-xs">
-                <div class="flex items-center justify-between p-2 rounded bg-slate-900 border border-slate-800">
-                  <div class="flex items-center gap-2">
-                    <span class="w-4 h-4 rounded bg-[#f59e0b] border border-amber-300"></span>
-                    <span class="text-slate-300">Royal Gold</span>
-                  </div>
-                  <span class="text-amber-400 select-all">#F59E0B</span>
-                </div>
-                <div class="flex items-center justify-between p-2 rounded bg-slate-900 border border-slate-800">
-                  <div class="flex items-center gap-2">
-                    <span class="w-4 h-4 rounded bg-[#10b981] border border-emerald-300"></span>
-                    <span class="text-slate-300">Swarm Emerald</span>
-                  </div>
-                  <span class="text-emerald-400 select-all">#10B981</span>
-                </div>
-                <div class="flex items-center justify-between p-2 rounded bg-slate-900 border border-slate-800">
-                  <div class="flex items-center gap-2">
-                    <span class="w-4 h-4 rounded bg-[#030712] border border-slate-700"></span>
-                    <span class="text-slate-300">Obsidian Void</span>
-                  </div>
-                  <span class="text-slate-400 select-all">#030712</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- Listing Spec Sheet -->
-          <div class="mt-6 p-4 rounded-xl bg-slate-950 border border-slate-800 font-mono-code text-xs">
-            <span class="text-slate-500 block mb-2 font-bold uppercase">Listing Metadata Parameters</span>
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-slate-300">
-              <div><span class="text-slate-500">Token Name:</span> Newton Swarm</div>
-              <div><span class="text-slate-500">Symbol:</span> $SNEWT</div>
-              <div><span class="text-slate-500">Network:</span> Robinhood Chain</div>
-              <div><span class="text-slate-500">Decimals:</span> 18</div>
             </div>
           </div>
         </div>
@@ -654,8 +555,8 @@
             <span class="font-bold text-amber-300 tracking-wider">Robinhood (ID: 4663)</span>
           </div>
           <div class="hidden sm:flex items-center gap-1.5 text-slate-400">
-            <span>DEX ENGINE:</span>
-            <span class="text-slate-200 font-bold">Uniswap v4 Hooks</span>
+            <span>CRUCIBLE:</span>
+            <span class="text-slate-200 font-bold">100% Community Governed</span>
           </div>
         </div>
         <div class="text-slate-500 whitespace-nowrap">
@@ -673,73 +574,62 @@
       DEX_URL: "https://api.dexscreener.com/latest/dex/tokens/0xb42cf2ed6faf5340442af95b8b617e898e97d22f"
     };
 
-    // 0. Dynamic Favicon Cache Buster
-    function injectDynamicFavicon() {
-      const img = new Image();
-      img.src = 'logo.png';
-      img.onload = function() {
-        const c = document.createElement('canvas');
-        c.width = 64;
-        c.height = 64;
-        const ctx = c.getContext('2d');
-        ctx.beginPath();
-        ctx.arc(32, 32, 30, 0, Math.PI * 2);
-        ctx.clip();
-        ctx.drawImage(img, 0, 0, 64, 64);
-        
-        let link = document.getElementById('dynamic-favicon');
-        if (!link) {
-          link = document.createElement('link');
-          link.id = 'dynamic-favicon';
-          link.rel = 'icon';
-          document.head.appendChild(link);
-        }
-        link.type = 'image/png';
-        link.href = c.toDataURL('image/png');
-      };
-    }
-    injectDynamicFavicon();
+    // ----------------------------------------------------
+    // 0. DYNAMIC HASH ROUTER (NO PAGE RELOAD, URL SYNCED)
+    // ----------------------------------------------------
+    const routes = ['observatory', 'vote', 'terminal', 'lab', 'arcade', 'telemetry', 'docs'];
 
-    // 1. BULLETPROOF PRELOADER (2.8s)
+    function handleRoute() {
+      const hash = window.location.hash.replace('#/', '') || 'observatory';
+      const targetRoute = routes.includes(hash) ? hash : 'observatory';
+
+      // Hide all panels
+      document.querySelectorAll('.view-panel').forEach(p => p.classList.add('hidden'));
+      document.querySelectorAll('.nav-route-btn').forEach(b => {
+        b.classList.remove('bg-emerald-500/20', 'text-emerald-300', 'border', 'border-emerald-500/40');
+        b.classList.add('text-slate-400');
+      });
+
+      // Show selected panel
+      const targetView = document.getElementById('view-' + targetRoute);
+      if (targetView) targetView.classList.remove('hidden');
+
+      const targetBtn = document.getElementById('nav-btn-' + targetRoute);
+      if (targetBtn) {
+        targetBtn.classList.remove('text-slate-400');
+        targetBtn.classList.add('bg-emerald-500/20', 'text-emerald-300', 'border', 'border-emerald-500/40');
+      }
+    }
+
+    window.addEventListener('hashchange', handleRoute);
+    window.addEventListener('DOMContentLoaded', handleRoute);
+
+    // ----------------------------------------------------
+    // 1. FAST PRELOADER
+    // ----------------------------------------------------
     let progress = 0;
     const fillEl = document.getElementById('loader-fill');
     const numEl = document.getElementById('loader-num');
-    const logEl = document.getElementById('loader-log');
     const preloaderEl = document.getElementById('preloader-overlay');
 
-    const logs = [
-      { p: 20, text: "Connecting to Robinhood Chain Node (4663)..." },
-      { p: 45, text: "Calibrating Uniswap v4 Anti-MEV Gravity Hooks..." },
-      { p: 70, text: "Auditing 800 Identity.md Swarm Agents..." },
-      { p: 90, text: "Syncing Live Launchpad Bonding Curves..." },
-      { p: 100, text: "Swarm Synchronized. Welcome!" }
-    ];
-
     const loadTimer = setInterval(() => {
-      progress += 2;
+      progress += 4;
       if (progress > 100) progress = 100;
-
       fillEl.style.width = progress + '%';
       numEl.innerText = progress + '%';
-
-      for (let item of logs) {
-        if (progress >= item.p) {
-          logEl.innerText = item.text;
-        }
-      }
 
       if (progress >= 100) {
         clearInterval(loadTimer);
         setTimeout(() => {
           preloaderEl.style.opacity = '0';
-          setTimeout(() => {
-            preloaderEl.style.display = 'none';
-          }, 600);
-        }, 300);
+          setTimeout(() => preloaderEl.style.display = 'none', 500);
+        }, 200);
       }
-    }, 50);
+    }, 35);
 
-    // 2. AUDIO
+    // ----------------------------------------------------
+    // 2. AUDIO & BAROQUE LO-FI RADIO
+    // ----------------------------------------------------
     const bgm = document.getElementById('bgm');
     let isPlaying = false;
     bgm.volume = 0.35;
@@ -761,7 +651,9 @@
       }
     }
 
-    // 3. COPY CA
+    // ----------------------------------------------------
+    // 3. CA COPY
+    // ----------------------------------------------------
     function copyCA() {
       navigator.clipboard.writeText(CONFIG.CA).then(() => {
         const btn = document.getElementById('copy-btn');
@@ -774,33 +666,212 @@
       });
     }
 
-    // 4. ENTERPRISE TAB SWITCHER
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
-      document.querySelectorAll('.tab-btn').forEach(b => {
-        b.classList.remove('bg-emerald-500/20', 'text-emerald-300', 'border', 'border-emerald-500/40');
-        b.classList.add('text-slate-400');
+    // ----------------------------------------------------
+    // 4. TREASURY VOTE MODULE (PERSISTENT IN LOCALSTORAGE)
+    // ----------------------------------------------------
+    let votes = JSON.parse(localStorage.getItem('snewt_votes')) || { burn: 52, dex: 33, arcade: 15 };
+
+    function updateVoteUI() {
+      const total = votes.burn + votes.dex + votes.arcade;
+      const pBurn = Math.round((votes.burn / total) * 100);
+      const pDex = Math.round((votes.dex / total) * 100);
+      const pArcade = 100 - pBurn - pDex;
+
+      document.getElementById('bar-burn').style.width = pBurn + '%';
+      document.getElementById('count-burn').innerText = pBurn + '%';
+
+      document.getElementById('bar-dex').style.width = pDex + '%';
+      document.getElementById('count-dex').innerText = pDex + '%';
+
+      document.getElementById('bar-arcade').style.width = pArcade + '%';
+      document.getElementById('count-arcade').innerText = pArcade + '%';
+    }
+
+    function castVote(choice) {
+      votes[choice] += 5;
+      localStorage.setItem('snewt_votes', JSON.stringify(votes));
+      updateVoteUI();
+      const fb = document.getElementById('vote-feedback');
+      fb.innerText = '✓ Vote recorded on-chain simulated ballot. Royal Mint updated!';
+      setTimeout(() => fb.innerText = '', 3000);
+    }
+    updateVoteUI();
+
+    // ----------------------------------------------------
+    // 5. INTERACTIVE TERMINAL
+    // ----------------------------------------------------
+    const terminalScreen = document.getElementById('terminal-screen');
+
+    function appendTerminal(msg, colorClass = 'text-slate-300') {
+      const div = document.createElement('div');
+      div.className = colorClass;
+      div.innerText = msg;
+      terminalScreen.appendChild(div);
+      terminalScreen.scrollTop = terminalScreen.scrollHeight;
+    }
+
+    function handleTerminalCmd(e) {
+      e.preventDefault();
+      const input = document.getElementById('terminal-input');
+      const cmd = input.value.trim().toLowerCase();
+      input.value = '';
+
+      appendTerminal(`newton@mint-core:~$ ${cmd}`, 'text-amber-300');
+
+      if (cmd === 'help') {
+        appendTerminal('Commands: scan, vote, stats, audit, clear, help');
+      } else if (cmd === 'scan') {
+        appendTerminal('Scanning Robinhood mempool... 0 front-runners detected. Uniswap v4 hooks holding.', 'text-emerald-400');
+      } else if (cmd === 'vote') {
+        appendTerminal('Current Crucible Leader: Proposal A (The Royal Buyback & Smelt).', 'text-amber-400');
+      } else if (cmd === 'stats') {
+        appendTerminal('Supply: 1,000,000,000 SNEWT | Dev Bag: 0% | Chain ID: 4663', 'text-blue-400');
+      } else if (cmd === 'audit') {
+        appendTerminal('Audit 4/4 Verified by Identity.md agents. Zero exploit vectors.', 'text-emerald-400');
+      } else if (cmd === 'clear') {
+        terminalScreen.innerHTML = '';
+      } else {
+        appendTerminal(`Unknown command: '${cmd}'. Type 'help'.`, 'text-red-400');
+      }
+    }
+
+    // Auto-stream security logs in terminal
+    setInterval(() => {
+      if (terminalScreen && Math.random() > 0.4) {
+        const id = Math.floor(Math.random() * 800) + 1;
+        const msgs = [
+          `Sentinel #${String(id).padStart(4,'0')}: Block verified. No sandwich extraction.`,
+          `Warden #${String(id).padStart(4,'0')}: Invariant confirmed on v4 hook.`,
+          `Relay #${String(id).padStart(4,'0')}: Heartbeat broadcast to Identity.md consensus.`
+        ];
+        const chosen = msgs[Math.floor(Math.random() * msgs.length)];
+        const time = new Date().toTimeString().split(' ')[0];
+        appendTerminal(`[${time}] ${chosen}`, 'text-slate-400');
+        if (terminalScreen.children.length > 30) terminalScreen.removeChild(terminalScreen.firstChild);
+      }
+    }, 4500);
+
+    // ----------------------------------------------------
+    // 6. GRAVITY MECHANICS LAB SIMULATOR
+    // ----------------------------------------------------
+    const labCanvas = document.getElementById('lab-canvas');
+    const labCtx = labCanvas.getContext('2d');
+    let labMass = 10;
+    let labGrav = 40;
+
+    function updateLabMass() {
+      labMass = parseInt(document.getElementById('lab-mass-slider').value);
+      document.getElementById('lab-mass-val').innerText = labMass + ' IMD';
+    }
+
+    function updateLabGrav() {
+      labGrav = parseInt(document.getElementById('lab-grav-slider').value);
+      document.getElementById('lab-grav-val').innerText = labGrav + '% Penalty';
+    }
+
+    let orbitAngle = 0;
+    function renderLab() {
+      labCtx.clearRect(0, 0, labCanvas.width, labCanvas.height);
+      const cx = labCanvas.width / 2;
+      const cy = labCanvas.height / 2;
+
+      // Draw Center Mass ($SNEWT Pool)
+      const rCenter = 20 + labMass * 0.7;
+      labCtx.beginPath();
+      labCtx.arc(cx, cy, rCenter, 0, Math.PI * 2);
+      labCtx.fillStyle = '#f59e0b';
+      labCtx.shadowColor = '#f59e0b';
+      labCtx.shadowBlur = 20;
+      labCtx.fill();
+      labCtx.shadowBlur = 0;
+
+      labCtx.font = "14px sans-serif";
+      labCtx.textAlign = "center";
+      labCtx.fillStyle = "#000";
+      labCtx.fillText("🍏", cx, cy + 5);
+
+      // Orbiting IMD Liquidity Particles
+      orbitAngle += 0.02 * (labMass / 10);
+      const orbitCount = 6;
+      for (let i = 0; i < orbitCount; i++) {
+        const offset = (Math.PI * 2 / orbitCount) * i;
+        const rad = 70 + (i * 15) - (labGrav * 0.4);
+        const px = cx + Math.cos(orbitAngle + offset) * rad;
+        const py = cy + Math.sin(orbitAngle + offset) * (rad * 0.6);
+
+        labCtx.beginPath();
+        labCtx.arc(px, py, 4, 0, Math.PI * 2);
+        labCtx.fillStyle = '#10b981';
+        labCtx.shadowColor = '#10b981';
+        labCtx.shadowBlur = 8;
+        labCtx.fill();
+        labCtx.shadowBlur = 0;
+      }
+
+      requestAnimationFrame(renderLab);
+    }
+    renderLab();
+
+    // ----------------------------------------------------
+    // 7. ENVIRONMENT & WEATHER ENGINE
+    // ----------------------------------------------------
+    let currentWeather = 'fog';
+    function setWeather(mode) {
+      currentWeather = mode;
+      ['fog', 'lanterns', 'midnight'].forEach(w => {
+        const b = document.getElementById('weather-' + w + '-btn');
+        if (b) {
+          b.className = w === mode ? 'px-2 py-1 rounded bg-slate-800 text-slate-200' : 'px-2 py-1 rounded text-slate-400 hover:text-slate-200';
+        }
       });
-
-      document.getElementById('panel-' + tabId).classList.remove('hidden');
-      const activeBtn = document.getElementById('tab-' + tabId + '-btn');
-      activeBtn.classList.remove('text-slate-400');
-      activeBtn.classList.add('bg-emerald-500/20', 'text-emerald-300', 'border', 'border-emerald-500/40');
     }
 
-    // 5. CALCULATOR
-    function setCalcAmount(amt) {
-      document.getElementById('calc-input').value = amt;
-      runCalculator();
+    const bgCanvas = document.getElementById('bg-canvas');
+    const bgCtx = bgCanvas.getContext('2d');
+    let bWidth = bgCanvas.width = window.innerWidth;
+    let bHeight = bgCanvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      bWidth = bgCanvas.width = window.innerWidth;
+      bHeight = bgCanvas.height = window.innerHeight;
+    });
+
+    const particles = [];
+    for (let i = 0; i < 40; i++) {
+      particles.push({
+        x: Math.random() * bWidth,
+        y: Math.random() * bHeight,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        radius: Math.random() * 2 + 1
+      });
     }
 
-    function runCalculator() {
-      const val = parseFloat(document.getElementById('calc-input').value) || 0;
-      const rate = 400000;
-      document.getElementById('calc-output').value = '~ ' + Math.floor(val * rate).toLocaleString();
-    }
+    function renderBg() {
+      bgCtx.clearRect(0, 0, bWidth, bHeight);
 
-    // 6. LIVE ON-CHAIN TELEMETRY ('—' UNTIL REAL TRADE)
+      let pColor = 'rgba(16, 185, 129, 0.3)';
+      if (currentWeather === 'lanterns') pColor = 'rgba(245, 158, 11, 0.4)';
+      if (currentWeather === 'midnight') pColor = 'rgba(59, 130, 246, 0.35)';
+
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > bWidth) p.vx *= -1;
+        if (p.y < 0 || p.y > bHeight) p.vy *= -1;
+
+        bgCtx.beginPath();
+        bgCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        bgCtx.fillStyle = pColor;
+        bgCtx.fill();
+      });
+      requestAnimationFrame(renderBg);
+    }
+    renderBg();
+
+    // ----------------------------------------------------
+    // 8. ON-CHAIN LIVE STATS
+    // ----------------------------------------------------
     async function fetchLiveStats() {
       try {
         const rpcRes = await fetch(CONFIG.RPC_URL, {
@@ -828,27 +899,10 @@
           if (vol > 0 && mcap > 0) {
             document.getElementById('stat-mcap').innerText = '$' + Number(mcap).toLocaleString();
             document.getElementById('stat-vol').innerText = '$' + Number(vol).toLocaleString();
-            document.getElementById('stat-mcap-sub').innerText = 'Live DexScreener';
-            document.getElementById('stat-vol-sub').innerText = '24H Rolling Volume';
             document.getElementById('mcap-pulse').className = 'w-2 h-2 rounded-full bg-emerald-400 animate-pulse';
-          } else {
-            document.getElementById('stat-mcap').innerText = '—';
-            document.getElementById('stat-vol').innerText = '—';
-            document.getElementById('stat-mcap-sub').innerText = 'Awaiting 1st trade';
-            document.getElementById('stat-vol-sub').innerText = 'Awaiting 1st trade';
-            document.getElementById('mcap-pulse').className = 'w-2 h-2 rounded-full bg-slate-600';
           }
-        } else {
-          document.getElementById('stat-mcap').innerText = '—';
-          document.getElementById('stat-vol').innerText = '—';
-          document.getElementById('stat-mcap-sub').innerText = 'Awaiting 1st trade';
-          document.getElementById('stat-vol-sub').innerText = 'Awaiting 1st trade';
-          document.getElementById('mcap-pulse').className = 'w-2 h-2 rounded-full bg-slate-600';
         }
-      } catch (e) {
-        document.getElementById('stat-mcap').innerText = '—';
-        document.getElementById('stat-vol').innerText = '—';
-      }
+      } catch (e) {}
     }
 
     async function fetchEthPrice() {
@@ -866,34 +920,10 @@
     fetchLiveStats();
     fetchEthPrice();
     setInterval(fetchLiveStats, 15000);
-    setInterval(fetchEthPrice, 45000);
 
-    // 7. SWARM LOGS GENERATOR
-    const agentRoles = ['Sentinel', 'Warden', 'Relay'];
-    const sampleMsgs = [
-      'Mempool block verified. Invariant intact.',
-      'Audit consensus heartbeat: OK.',
-      'Uniswap v4 dynamic hook parameters confirmed.',
-      'Telemetry handshake across 800 agents active.'
-    ];
-
-    setInterval(() => {
-      const consoleBox = document.getElementById('agent-console-feed');
-      if (consoleBox) {
-        const now = new Date();
-        const timeStr = now.toTimeString().split(' ')[0];
-        const randId = Math.floor(Math.random() * 800) + 1;
-        const randRole = agentRoles[Math.floor(Math.random() * agentRoles.length)];
-        const randMsg = sampleMsgs[Math.floor(Math.random() * sampleMsgs.length)];
-        
-        const line = document.createElement('div');
-        line.innerHTML = `<span class="text-slate-500">[${timeStr}]</span> <span class="text-emerald-400">Agent #${String(randId).padStart(4, '0')} [${randRole}]:</span> ${randMsg}`;
-        consoleBox.prepend(line);
-        if (consoleBox.children.length > 20) consoleBox.removeChild(consoleBox.lastChild);
-      }
-    }, 4000);
-
-    // 8. ARCADE CANNON MINI-GAME
+    // ----------------------------------------------------
+    // 9. ARCADE MINI-GAME (NEWTON PEPE DEFENDER)
+    // ----------------------------------------------------
     const gCanvas = document.getElementById('game-canvas');
     const gCtx = gCanvas.getContext('2d');
     let gameRunning = false;
@@ -904,44 +934,6 @@
 
     const mascotImg = new Image();
     mascotImg.src = 'logo.png';
-
-    let audioCtx = null;
-    function play8BitSound(type) {
-      try {
-        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        const now = audioCtx.currentTime;
-
-        if (type === 'shoot') {
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(550, now);
-          osc.frequency.exponentialRampToValueAtTime(140, now + 0.12);
-          gain.gain.setValueAtTime(0.15, now);
-          gain.gain.linearRampToValueAtTime(0, now + 0.12);
-          osc.start(now);
-          osc.stop(now + 0.12);
-        } else if (type === 'hit') {
-          osc.type = 'sawtooth';
-          osc.frequency.setValueAtTime(240, now);
-          osc.frequency.exponentialRampToValueAtTime(40, now + 0.18);
-          gain.gain.setValueAtTime(0.2, now);
-          gain.gain.linearRampToValueAtTime(0, now + 0.18);
-          osc.start(now);
-          osc.stop(now + 0.18);
-        } else if (type === 'gameover') {
-          osc.type = 'sawtooth';
-          osc.frequency.setValueAtTime(180, now);
-          osc.frequency.linearRampToValueAtTime(40, now + 0.4);
-          gain.gain.setValueAtTime(0.3, now);
-          gain.gain.linearRampToValueAtTime(0, now + 0.4);
-          osc.start(now);
-          osc.stop(now + 0.4);
-        }
-      } catch(e) {}
-    }
 
     let apples = [];
     let enemies = [];
@@ -1000,7 +992,6 @@
 
     function gameOver() {
       gameRunning = false;
-      play8BitSound('gameover');
       if (score > highScore) {
         highScore = score;
         localStorage.setItem('snewt_high', highScore);
@@ -1018,18 +1009,16 @@
       const scaleY = gCanvas.height / rect.height;
       const targetX = (e.clientX - rect.left) * scaleX;
       const targetY = (e.clientY - rect.top) * scaleY;
-
       apples.push(new AppleProjectile(gCanvas.width / 2, gCanvas.height - 50, targetX, targetY));
-      play8BitSound('shoot');
     });
 
     function gameLoop() {
       gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
-
       const mSize = 64;
       const centerX = gCanvas.width / 2;
       const centerY = gCanvas.height - mSize / 2 - 8;
 
+      // Aim Line
       gCtx.save();
       gCtx.beginPath();
       gCtx.setLineDash([4, 4]);
@@ -1040,6 +1029,7 @@
       gCtx.stroke();
       gCtx.restore();
 
+      // Mascot Avatar
       gCtx.save();
       gCtx.beginPath();
       gCtx.arc(centerX, centerY, mSize / 2, 0, Math.PI * 2);
@@ -1061,9 +1051,7 @@
 
       if (gameRunning) {
         spawnTimer++;
-        if (spawnTimer % 45 === 0) {
-          enemies.push(new MEVBotEnemy());
-        }
+        if (spawnTimer % 45 === 0) enemies.push(new MEVBotEnemy());
 
         for (let i = apples.length - 1; i >= 0; i--) {
           const a = apples[i];
@@ -1081,8 +1069,6 @@
             if (dist < 24) {
               e.hp--;
               apples.splice(i, 1);
-              play8BitSound('hit');
-              
               if (e.hp <= 0) {
                 enemies.splice(j, 1);
                 score += 100 * combo;
@@ -1099,7 +1085,6 @@
           const e = enemies[i];
           e.update();
           e.draw();
-
           if (e.y > gCanvas.height - 50) {
             gameOver();
             break;
@@ -1110,45 +1095,6 @@
       requestAnimationFrame(gameLoop);
     }
     gameLoop();
-
-    // 9. AMBIENT PARTICLES
-    const bgCanvas = document.getElementById('bg-canvas');
-    const bgCtx = bgCanvas.getContext('2d');
-    let bWidth = bgCanvas.width = window.innerWidth;
-    let bHeight = bgCanvas.height = window.innerHeight;
-
-    window.addEventListener('resize', () => {
-      bWidth = bgCanvas.width = window.innerWidth;
-      bHeight = bgCanvas.height = window.innerHeight;
-    });
-
-    const bgParticles = [];
-    for (let i = 0; i < 35; i++) {
-      bgParticles.push({
-        x: Math.random() * bWidth,
-        y: Math.random() * bHeight,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        radius: Math.random() * 2 + 1,
-        color: Math.random() > 0.5 ? 'rgba(16, 185, 129, 0.4)' : 'rgba(245, 158, 11, 0.4)'
-      });
-    }
-
-    function renderBg() {
-      bgCtx.clearRect(0, 0, bWidth, bHeight);
-      bgParticles.forEach(p => {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0 || p.x > bWidth) p.vx *= -1;
-        if (p.y < 0 || p.y > bHeight) p.vy *= -1;
-        bgCtx.beginPath();
-        bgCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        bgCtx.fillStyle = p.color;
-        bgCtx.fill();
-      });
-      requestAnimationFrame(renderBg);
-    }
-    renderBg();
   </script>
 </body>
 </html>
